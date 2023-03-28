@@ -9,15 +9,15 @@
 #include <exception>
 
 namespace core {
-    class DynamicLibraryLoadingException : public std::exception
+    class DynamicLibraryException : public std::exception
     {
 
 ////////////////////// CONSTRUCTORS/DESTRUCTORS /////////////////////////
 
         public:
-            DynamicLibraryLoadingException(std::string message) : _message(message) {}
+            DynamicLibraryException(std::string reason, std::string libPath, std::string error);
 
-            ~DynamicLibraryLoadingException() override = default;
+            ~DynamicLibraryException() override = default;
 
 
 //////////////////////--------------------------/////////////////////////
@@ -29,7 +29,8 @@ namespace core {
 
 
         private:
-            std::string _message;
+            std::string _libPath;
+            std::string _formattedMessage;
 
 //////////////////////--------------------------/////////////////////////
 
@@ -37,9 +38,7 @@ namespace core {
 
 /////////////////////////////// METHODS /////////////////////////////////
         public:
-            const char *what() const noexcept override {
-                return this->_message.c_str();
-            }
+            const char *what() const noexcept override;
 
         private:
 

@@ -8,5 +8,6 @@
 
 TEST(DynamicLoader, SimpleLoadFailure)
 {
-    EXPECT_ANY_THROW(core::DynamicLoader loader("invalid_path"));
+    core::DynamicLoader loader;
+    EXPECT_ANY_THROW(loader.loadHandler("dontExist.so"));
 }
