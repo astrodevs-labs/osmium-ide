@@ -3,7 +3,6 @@
 ** DynamicLoader.cpp by 0xMemoryGrinder
 */
 
-#include <dlfcn.h>
 #include <filesystem>
 #include "utils/DynamicLoader.hpp"
 #include "exceptions/DynamicLibraryException.hpp"
@@ -68,7 +67,7 @@ void core::DynamicLoader::loadHandler(const std::string &libPath)
         if (std::filesystem::exists(libPath))
             throw core::MissingDynamicLibraryException(libPath);
 #if _WIN32
-        throw debug::CorruptedDynamicLibraryException(libPath, DynamicLoader::_getLastErrorStdStr());
+        throw core::CorruptedDynamicLibraryException(libPath, DynamicLoader::_getLastErrorStdStr());
 #else
         throw core::CorruptedDynamicLibraryException(libPath, dlerror());
 #endif
