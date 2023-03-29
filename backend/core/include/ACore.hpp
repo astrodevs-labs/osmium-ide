@@ -13,6 +13,7 @@
 #include <future>
 #include <typeindex>
 #include <vector>
+#include <map>
 #include "utils/DynamicLoader.hpp"
 #include "IModule.hpp"
 
