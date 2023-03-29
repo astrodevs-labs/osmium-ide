@@ -10,9 +10,8 @@
     #include <Windows.h>
 #else
     #include <dlfcn.h> //dlopen
-#include "exceptions/DynamicLibraryException.hpp"
-
 #endif
+#include "exceptions/DynamicLibraryException.hpp"
 
 namespace core
 {

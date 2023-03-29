@@ -6,13 +6,22 @@ set(OSMIUM_TESTS_ENABLED ON)
 
 set(modules "")
 
+set(LIBRARY_OUTPUT_PATH ..)
+
+
 # subfolders for  modules
 foreach(module ${modules})
     add_subdirectory(${module})
 endforeach()
 
+if(MSVC)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+    set(BUILD_SHARED_LIBS TRUE)
+endif()
+
 
 add_subdirectory(core)
+
 
 add_executable(backend main.cpp)
 target_link_libraries(backend backend-core)
