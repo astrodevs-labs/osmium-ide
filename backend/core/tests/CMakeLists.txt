@@ -4,6 +4,8 @@ set(CMAKE_CXX_STANDARD 20)
 file(GLOB_RECURSE UNIT_TESTS_SRCS unit-tests/*.cpp)
 file(GLOB_RECURSE E2E_TESTS_SRCS e2e-tests/*.cpp)
 
+set(EXECUTABLE_OUTPUT_PATH ../..)
+
 add_executable(backend-core-unit-tests EXCLUDE_FROM_ALL ${UNIT_TESTS_SRCS})
 target_link_libraries(backend-core-unit-tests PRIVATE backend-core GTest::gtest_main)
 target_include_directories(backend-core-unit-tests PRIVATE ../include)
