@@ -11,6 +11,9 @@
 
 namespace core
 {
+    /**
+     * @class Exception raised when a symbol loading fails
+     */
     class CorruptedDynamicLibraryException : public DynamicLibraryException
     {
         public:
