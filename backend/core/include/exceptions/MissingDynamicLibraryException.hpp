@@ -11,10 +11,13 @@
 
 namespace core
 {
+    /**
+     * @class Exception raised when a dynamic library is not found at specified path
+     */
     class MissingDynamicLibraryException : public DynamicLibraryException
     {
         public:
-            MissingDynamicLibraryException(std::string libPath);
+            explicit MissingDynamicLibraryException(std::string libPath);
 
             ~MissingDynamicLibraryException() override = default;
     };
