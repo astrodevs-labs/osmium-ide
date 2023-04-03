@@ -5,14 +5,15 @@
 
 #pragma once
 
-
-class IModule
+namespace core
 {
+    class IModule
+    {
 
 ////////////////////// CONSTRUCTORS/DESTRUCTORS /////////////////////////
 
-    public:
-        virtual ~IModule() = default;
+        public:
+            virtual ~IModule() = default;
 
 
 //////////////////////--------------------------/////////////////////////
@@ -20,10 +21,10 @@ class IModule
 
 
 ///////////////////////////// PROPERTIES ////////////////////////////////
-    public:
+        public:
 
 
-    private:
+        private:
 
 
 //////////////////////--------------------------/////////////////////////
@@ -31,12 +32,13 @@ class IModule
 
 
 /////////////////////////////// METHODS /////////////////////////////////
-    public:
+        public:
 
 
-    private:
+        private:
 
 
 //////////////////////--------------------------/////////////////////////
 
-};
+    };
+}
