@@ -16,8 +16,8 @@ void core::Core::loadSoFile(std::string filePath)
     loader.loadHandler(filePath);
 
     auto createModuleFct = loader.loadSymbol<void *(*)(std::shared_ptr<MessagingInterface>)>("createModule");
-    auto getModuleNameFct = loader.loadSymbol<std::string(*)()>("getModuleName");
-    auto moduleName = getModuleNameFct();
+    auto getModuleNameFct = loader.loadSymbol<const char *(*)()>("getModuleName");
+    auto moduleName = std::string(getModuleNameFct());
     auto shared = shared_from_this();
     auto msgInterface = std::make_shared<MessagingInterface>(shared, moduleName);
     auto module = reinterpret_cast<IModule *>(createModuleFct(msgInterface));
