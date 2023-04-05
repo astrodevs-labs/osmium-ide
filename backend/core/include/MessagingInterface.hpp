@@ -62,11 +62,21 @@ namespace core
              * @tparam T The type of the message to handle
              * @param priority A priority to sort the handlers, the higher the priority, the later the handler will be called (0 is the highest priority). If two handlers have the same priority, the order is undefined. You should leave space between priorities to allow other modules to register handlers between yours.
              * @param handler The handler to register. The handler will be called with the message and the name of the module that emitted it.
+             * @return The ID of the registered handler
              */
             template<typename T>
-            void registerHandler(uint64_t priority, std::function<void(std::shared_ptr<T>, std::string)> handler)
+            uint64_t registerHandler(uint64_t priority, std::function<void(std::shared_ptr<T>, std::string)> handler)
             {
-                _core->registerHandler<T>(priority, handler);
+                return _core->registerHandler<T>(priority, handler);
+            }
+
+            /**
+             * @brief Remove the handler identified by its id from _handlers.
+             * @param id The id of the handler to remove.
+             */
+            void removeHandler(uint64_t id)
+            {
+                _core->removeHandler(id);
             }
 
             /**
