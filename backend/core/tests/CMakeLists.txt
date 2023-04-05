@@ -7,6 +7,7 @@ file(GLOB_RECURSE E2E_TESTS_SRCS e2e-tests/*.cpp)
 file(GLOB_RECURSE E2E_TESTS_ICLS e2e-tests/*.hpp)
 
 set(EXECUTABLE_OUTPUT_PATH ../..)
+set(CMAKE_SHARED_LIBRARY_PREFIX "")
 
 add_subdirectory(inputModule)
 

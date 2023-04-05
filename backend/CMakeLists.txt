@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.17)
 project(backend)
 
 set(CMAKE_CXX_STANDARD 20)
+# Set to ON to enable tests targets
 set(OSMIUM_TESTS_ENABLED ON)
 
 set(modules "")

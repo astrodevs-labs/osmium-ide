@@ -60,7 +60,7 @@ void core::DynamicLoader::loadHandler(const std::string &libPath)
 #if _WIN32
     _handler = LoadLibrary(TEXT(libPath.c_str()));
 #else
-    _handler = dlopen(libPath.c_str(), RTLD_LAZY);
+    _handler = dlopen(libPath.c_str(), RTLD_LAZY | RTLD_GLOBAL);
 #endif
 
     if (_handler == nullptr) {
