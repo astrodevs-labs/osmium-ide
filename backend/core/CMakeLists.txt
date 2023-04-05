@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 file(GLOB_RECURSE SRCS src/*.cpp)
 file(GLOB_RECURSE ICLS include/*.hpp)
 
-add_library(backend-core SHARED  ${SRCS} ${ICLS})
+add_library(backend-core ${SRCS} ${ICLS})
 target_include_directories(backend-core PUBLIC include)
 
 
