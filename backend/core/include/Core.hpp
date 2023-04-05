@@ -46,7 +46,7 @@ namespace core
             /**
              * @property _handlers map of handlers for each message type sorted by their priority
              */
-            std::unordered_map<std::type_index, std::map<uint64_t, std::vector<std::function<void(std::any, std::string)>>>> _handlers;
+            std::unordered_map<std::type_index, std::map<uint64_t, std::map<uint64_t, std::function<void(std::any, std::string)>>>> _handlers;
             /**
              * @property _loadedLibraries vector of DynamicLoader instances for each loaded library
              */
@@ -69,13 +69,38 @@ namespace core
              * @tparam T The type of the message to handle
              * @param priority A priority to sort the handlers, the higher the priority, the later the handler will be called (0 is the highest priority). If two handlers have the same priority, the order is undefined. You should leave space between priorities to allow other modules to register handlers between yours.
              * @param handler The handler to register. The handler will be called with the message and the name of the module that emitted it.
+             * @return The ID of the registered handler
              */
             template<typename T>
-            void registerHandler(uint64_t priority, std::function<void(std::shared_ptr<T>, std::string)> handler)
+            uint64_t registerHandler(uint64_t priority, std::function<void(std::shared_ptr<T>, std::string)> handler)
             {
-                _handlers[std::type_index(typeid(T))][priority].push_back([handler](std::any anyMessage, std::string moduleName) {
+                //TODO: Change id generation
+
+                static uint64_t handlerId = 0;
+                const uint64_t id = ++handlerId;
+
+                _handlers[std::type_index(typeid(T))][priority][id] = [handler](std::any anyMessage, std::string moduleName) {
                     handler(std::any_cast<std::shared_ptr<T>>(anyMessage), moduleName);
-                });
+                };
+                return id;
+            }
+
+            /**
+             * @brief Remove the handler identified by its id from _handlers.
+             * @param id The id of the handler to remove.
+             */
+            void removeHandler(uint64_t id)
+            {
+                for (auto &typeIndex: _handlers) {
+                    for (auto &priority : _handlers[typeIndex.first]) {
+                        for (auto &handlerId : priority.second) {
+                            if (handlerId.first == id) {
+                                priority.second[id] = nullptr;
+                                return;
+                            }
+                        }
+                    }
+                }
             }
 
             /**
@@ -90,8 +115,8 @@ namespace core
             {
                 return std::async(std::launch::async, [this, message, moduleName]() {
                     for (auto &priority : _handlers[std::type_index(typeid(T))]) {
-                        for (auto &handler : priority.second) {
-                            handler(message, moduleName);
+                        for (auto &handlerId : priority.second) {
+                            handlerId.second(message, moduleName);
                         }
                     }
                     return message;
