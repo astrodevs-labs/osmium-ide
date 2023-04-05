@@ -21,6 +21,7 @@ namespace core::tests::input
         public:
             InputModule(std::shared_ptr<MessagingInterface> msg)
             {
+                ModulesMediator::setup();
                 this->msg = msg;
 
                 this->msg->registerHandler<T>(1000, [](std::shared_ptr<T> received, std::string from) {
