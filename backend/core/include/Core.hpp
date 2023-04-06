@@ -14,11 +14,13 @@
 #include <typeindex>
 #include <utility>
 #include <vector>
+#include <random>
 #include "utils/DynamicLoader.hpp"
 #include "IModule.hpp"
 
 namespace core
 {
+    typedef std::string handler_id;
 
     /**
      * @class Core
@@ -46,7 +48,7 @@ namespace core
             /**
              * @property _handlers map of handlers for each message type sorted by their priority
              */
-            std::unordered_map<std::type_index, std::map<uint64_t, std::map<uint64_t, std::function<void(std::any, std::string)>>>> _handlers;
+            std::unordered_map<std::type_index, std::map<uint64_t, std::map<handler_id, std::function<void(std::any, std::string)>>>> _handlers;
             /**
              * @property _loadedLibraries vector of DynamicLoader instances for each loaded library
              */
@@ -64,6 +66,35 @@ namespace core
 
 /////////////////////////////// METHODS /////////////////////////////////
         public:
+            static std::string generateHandlerId() {
+                static std::random_device dev;
+                static std::mt19937_64 rng(dev());
+                static std::uniform_int_distribution<std::uint64_t> dist(0, std::numeric_limits<std::uint64_t>::max());
+
+                std::uint64_t data[2];
+                data[0] = dist(rng);
+                data[1] = dist(rng);
+
+                // Set the version number to 4 (randomly generated)
+                data[0] &= ~(0xf000ull);
+                data[0] |= 0x4000ull;
+
+                // Set the variant to RFC 4122
+                data[1] &= ~(0xc000'0000'0000'0000ull);
+                data[1] |= 0x8000'0000'0000'0000ull;
+
+                // Format the UUID string
+                char buf[37];
+                std::snprintf(buf, sizeof(buf),
+                              "%08x-%04x-%04x-%04x-%012llx",
+                              (unsigned int)(data[0] >> 32),
+                              (unsigned int)(data[0] >> 16),
+                              (unsigned int)(data[0] >> 0),
+                              (unsigned int)(data[1] >> 48),
+                              (unsigned long long)(data[1] & 0x0000'ffff'ffff'ffffull));
+
+                return {buf};
+            }
             /**
              * @brief Register a handler for a specific message type with a given priority
              * @tparam T The type of the message to handle
@@ -72,12 +103,9 @@ namespace core
              * @return The ID of the registered handler
              */
             template<typename T>
-            uint64_t registerHandler(uint64_t priority, std::function<void(std::shared_ptr<T>, std::string)> handler)
+            handler_id registerHandler(uint64_t priority, std::function<void(std::shared_ptr<T>, std::string)> handler)
             {
-                //TODO: Change id generation
-
-                static uint64_t handlerId = 0;
-                const uint64_t id = ++handlerId;
+                handler_id id = generateHandlerId();
 
                 _handlers[std::type_index(typeid(T))][priority][id] = [handler](std::any anyMessage, std::string moduleName) {
                     handler(std::any_cast<std::shared_ptr<T>>(anyMessage), moduleName);
@@ -89,7 +117,7 @@ namespace core
              * @brief Remove the handler identified by its id from _handlers.
              * @param id The id of the handler to remove.
              */
-            void removeHandler(uint64_t id)
+            void removeHandler(handler_id id)
             {
                 for (auto &typeIndex: _handlers) {
                     for (auto &priority : _handlers[typeIndex.first]) {
