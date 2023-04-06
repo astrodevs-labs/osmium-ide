@@ -123,7 +123,7 @@ namespace core
                     for (auto &priority : _handlers[typeIndex.first]) {
                         for (auto &handlerId : priority.second) {
                             if (handlerId.first == id) {
-                                priority.second[id] = nullptr;
+                                priority.second.erase(handlerId.first);
                                 return;
                             }
                         }
