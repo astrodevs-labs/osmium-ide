@@ -65,7 +65,7 @@ namespace core
              * @return The ID of the registered handler
              */
             template<typename T>
-            uint64_t registerHandler(uint64_t priority, std::function<void(std::shared_ptr<T>, std::string)> handler)
+            handler_id registerHandler(uint64_t priority, std::function<void(std::shared_ptr<T>, std::string)> handler)
             {
                 return _core->registerHandler<T>(priority, handler);
             }
@@ -74,7 +74,7 @@ namespace core
              * @brief Remove the handler identified by its id from _handlers.
              * @param id The id of the handler to remove.
              */
-            void removeHandler(uint64_t id)
+            void removeHandler(handler_id id)
             {
                 _core->removeHandler(id);
             }
