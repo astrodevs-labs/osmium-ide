@@ -8,6 +8,7 @@
 #include <iostream>
 #include <memory>
 #include <functional>
+#include <unordered_map>
 #include <map>
 #include <any>
 #include <future>
@@ -69,7 +70,7 @@ namespace core
             static std::string generateHandlerId() {
                 static std::random_device dev;
                 static std::mt19937_64 rng(dev());
-                static std::uniform_int_distribution<std::uint64_t> dist(0, std::numeric_limits<std::uint64_t>::max());
+                static std::uniform_int_distribution<std::uint64_t> dist(0, 18446744073709551615);
 
                 std::uint64_t data[2];
                 data[0] = dist(rng);
