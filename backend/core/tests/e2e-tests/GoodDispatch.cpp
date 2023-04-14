@@ -15,7 +15,7 @@ TEST(GoodDispatch, SimpleString)
     core::tests::ModulesMediator::setup();
     auto core = std::make_shared<core::Core>();
 
-    core->loadSoFile("core/tests/backend-core-tests-input-module-string.so");
+    core->loadSoFile("./backend-core-tests-input-module-string.so");
     core->emitMessage(std::make_shared<std::string>("Hello World!"), "test").wait();
     core::tests::ModulesMediator::parseReceived();
     auto received = core::tests::ModulesMediator::getReceived("InputModule");
@@ -30,7 +30,7 @@ TEST(GoodDispatch, SimpleInt)
     core::tests::ModulesMediator::setup();
     auto core = std::make_shared<core::Core>();
 
-    core->loadSoFile("core/tests/backend-core-tests-input-module-int.so");
+    core->loadSoFile("./backend-core-tests-input-module-int.so");
     core->emitMessage(std::make_shared<int>(42), "test").wait();
     core::tests::ModulesMediator::parseReceived();
     auto received = core::tests::ModulesMediator::getReceived("InputModule");
@@ -45,7 +45,7 @@ TEST(GoodDispatch, SimpleFloat)
     core::tests::ModulesMediator::setup();
     auto core = std::make_shared<core::Core>();
 
-    core->loadSoFile("core/tests/backend-core-tests-input-module-float.so");
+    core->loadSoFile("./backend-core-tests-input-module-float.so");
     core->emitMessage(std::make_shared<float>(42.42), "test").wait();
     core::tests::ModulesMediator::parseReceived();
     auto received = core::tests::ModulesMediator::getReceived("InputModule");
@@ -60,7 +60,7 @@ TEST(GoodDispatch, SimpleDouble)
     core::tests::ModulesMediator::setup();
     auto core = std::make_shared<core::Core>();
 
-    core->loadSoFile("core/tests/backend-core-tests-input-module-double.so");
+    core->loadSoFile("./backend-core-tests-input-module-double.so");
     core->emitMessage(std::make_shared<double>(42.42), "test").wait();
     core::tests::ModulesMediator::parseReceived();
     auto received = core::tests::ModulesMediator::getReceived("InputModule");
@@ -75,7 +75,7 @@ TEST(GoodDispatch, SimpleChar)
     core::tests::ModulesMediator::setup();
     auto core = std::make_shared<core::Core>();
 
-    core->loadSoFile("core/tests/backend-core-tests-input-module-char.so");
+    core->loadSoFile("./backend-core-tests-input-module-char.so");
     core->emitMessage(std::make_shared<char>('a'), "test").wait();
     core::tests::ModulesMediator::parseReceived();
     auto received = core::tests::ModulesMediator::getReceived("InputModule");
@@ -90,7 +90,7 @@ TEST(GoodDispatch, SimpleBool)
     core::tests::ModulesMediator::setup();
     auto core = std::make_shared<core::Core>();
 
-    core->loadSoFile("core/tests/backend-core-tests-input-module-bool.so");
+    core->loadSoFile("./backend-core-tests-input-module-bool.so");
     core->emitMessage(std::make_shared<bool>(true), "test").wait();
     core::tests::ModulesMediator::parseReceived();
     auto received = core::tests::ModulesMediator::getReceived("InputModule");
@@ -105,7 +105,7 @@ TEST(GoodDispatch, SimpleNull)
     core::tests::ModulesMediator::setup();
     auto core = std::make_shared<core::Core>();
 
-    core->loadSoFile("core/tests/backend-core-tests-input-module-bool.so");
+    core->loadSoFile("./backend-core-tests-input-module-bool.so");
     core->emitMessage(std::make_shared<bool>(nullptr), "test").wait();
     core::tests::ModulesMediator::parseReceived();
     auto received = core::tests::ModulesMediator::getReceived("InputModule");
