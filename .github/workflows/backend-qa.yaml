@@ -34,7 +34,7 @@ jobs:
         run: echo ${{ steps.dirs.outputs.dirs }}
 
   backend-tests:
-    needs: 
+    needs:
       - backend-build
       - collect_dirs
     strategy:
@@ -86,8 +86,15 @@ jobs:
             .\backend-${{ matrix.backend-directory }}-e2e-tests.exe
 
   style-check:
-    needs: backend-build
-    runs-on: ubuntu-latest
+    needs:
+      - backend-build
+      - collect_dirs
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        backend-directory: ${{ fromJson(needs.collect_dirs.outputs.dirs) }}
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -98,9 +105,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           style: file
-          repo-root: backend
+          repo-root: backend/${{ matrix.backend-directory }}
+          thread-comments: true
+          ignore: "tests"
+          extra-args: "-Iinclude"
 
       - name: Check linter result
         if: steps.linter.outputs.checks-failed > 0
-        run: echo "Some files failed the linting checks!"
-        
+        run: |
+          echo "Some files failed the linting checks!"
+          exit 1
