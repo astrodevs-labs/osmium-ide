@@ -21,7 +21,7 @@
 
 namespace core
 {
-    typedef std::string handler_id;
+    using handler_id = std::string;
 
     /**
      * @class Core
@@ -67,10 +67,10 @@ namespace core
 
 /////////////////////////////// METHODS /////////////////////////////////
         public:
-            static std::string generateHandlerId() {
+            static handler_id generateHandlerId() {
                 static std::random_device dev;
                 static std::mt19937_64 rng(dev());
-                static std::uniform_int_distribution<std::uint64_t> dist(0, 18446744073709551615);
+                static std::uniform_int_distribution<std::uint64_t> dist(0, 18446744073709551615u);
 
                 std::uint64_t data[2];
                 data[0] = dist(rng);
