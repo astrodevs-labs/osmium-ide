@@ -1,21 +1,21 @@
-import "./App.css";
-import CheckBox from "./components/CheckBox";
-import Label from "./components/Label";
+import './App.css';
+import Toolbar from './components/Toolbar/Toolbar';
+import { useState } from 'react';
 
-function App() {
+const App = () => {
+  const [content, setContent] = useState<string>('');
   return (
     <div className="container">
-      <div className="row">
-        <Label label={'test'} />
-        <br/>
-        <CheckBox
-          label={'test'}
-          checked={true}
-          disabled={false}
-        />
-      </div>
+      <Toolbar content={content} setContent={setContent} />
+      <textarea
+        onChange={(event) => {
+          setContent(event.target.value);
+        }}
+        className="textarea"
+        value={content}
+      ></textarea>
     </div>
   );
-}
+};
 
 export default App;
