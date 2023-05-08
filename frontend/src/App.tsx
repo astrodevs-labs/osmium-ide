@@ -12,7 +12,7 @@ const App = () => {
         }}
         className="border-gray-900 text-xl w-full bg-gray-900 text-gray-300"
         value={content}
-      ></textarea>
+      />
     </div>
   );
 };
