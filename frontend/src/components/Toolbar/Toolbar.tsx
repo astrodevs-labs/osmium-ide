@@ -1,8 +1,8 @@
-import Button from '../Button/Button';
+import { Button, Icon } from '../Components';
 import './Toolbar.css';
 import React, { useState } from 'react';
 import { ToolbarProps } from './Toolbar.types';
-import { BaseDirectory, readTextFile, writeTextFile } from '@tauri-apps/api/fs';
+import { readTextFile, writeTextFile } from '@tauri-apps/api/fs';
 
 const Toolbar: React.FC<ToolbarProps> = ({ content, setContent }) => {
   const [path, setPath] = useState<string>('');
@@ -20,6 +20,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ content, setContent }) => {
   return (
     <div className="toolbar">
       <div>
+        <Icon icon="arrow-up" />
         <Button onClick={openFile}>Open file</Button>
         <input
           onChange={(event) => {
