@@ -8,8 +8,8 @@ const icons: any = {
 };
 const Icon = (props: IconProps) => {
   return (
-    <svg width="22" height="22" viewBox="0 0 1024 1024">
-      <path d={icons[props.icon]}></path>
+    <svg width={props.size} height={props.size} viewBox="0 0 1024 1024">
+      <path fill={props.color} d={icons[props.icon]}></path>
     </svg>
   );
 };
