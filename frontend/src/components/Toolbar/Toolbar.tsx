@@ -25,6 +25,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ content, setContent }) => {
           onChange={(event) => {
             setPath(event.target.value);
           }}
+          style={{ marginLeft: '10px' }}
         />
       </div>
       <Button onClick={saveFile}>Save file</Button>
