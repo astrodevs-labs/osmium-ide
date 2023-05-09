@@ -20,7 +20,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ content, setContent }) => {
   return (
     <div className="toolbar">
       <div>
-        <Icon icon="arrow-up" />
         <Button onClick={openFile}>Open file</Button>
         <input
           onChange={(event) => {
