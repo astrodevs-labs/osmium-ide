@@ -1,5 +1,7 @@
 export interface IconProps {
   icon: string;
   size: number;
-  color: string;
+  fill?: string;
+  stroke?: string;
+  viewBox: string;
 }
