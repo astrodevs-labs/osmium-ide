@@ -49,8 +49,8 @@ const App = () => {
           <div className="grid grid-cols-3 gap-4">
             <Button>1</Button>
             <Button disabled>2</Button>
-            <Icon icon={'arrow-up'} size={64} fill="white" viewBox='0 0 1024' />
-            <Icon icon={'arrow-down'} size={64} fill="white" viewBox='0 0 1024' />
+            <Icon icon={'arrow-up'} size={64} fill="white" viewBox='0 0 1024 1024' />
+            <Icon icon={'arrow-down'} size={64} fill="white" viewBox='0 0 1024 1024' />
           </div>
           <br />
           <Card title="Card title" subtitle="Card subtitle">
