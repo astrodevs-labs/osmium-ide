@@ -1,4 +1,4 @@
-import { Button, Icon } from '../Components';
+import { Button } from '../Components';
 import './Toolbar.css';
 import React, { useState } from 'react';
 import { ToolbarProps } from './Toolbar.types';

@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { FolderProps } from './Folder.types';
 import { Icon } from '../Components';
 
@@ -22,9 +22,11 @@ const Folder: React.FC<FolderProps> = ({ name, isFolder, items }) => {
 
   return (
     <div className="text-white">
-      <div className="flex items-center space-x-2 cursor-default border border-sky-500" onClick={handleDoubleClick}>
+      <div className="flex items-center space-x-2 cursor-default" onClick={handleDoubleClick}>
         <div onClick={handleClick}>
-          {isFolder && <Icon viewBox='0 0 1024 1024' icon={expand ? 'arrow-down' : 'arrow-right'} size={16} fill="white" />}
+          {isFolder && (
+            <Icon viewBox="0 0 1024 1024" icon={expand ? 'arrow-down' : 'arrow-right'} size={16} fill="white" />
+          )}
         </div>
         <h2 className={(isFolder ? '' : 'pl-2') + ' select-none'}>{name}</h2>
       </div>
