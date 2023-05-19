@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Label from '../Label/Label';
 import './CheckBox.css';
 import { CheckBoxProps } from './CheckBox.types';
+import Icon from '../Icon/Icon';
 
 const CheckBox: React.FC<CheckBoxProps> = ({
   label,
@@ -16,22 +17,21 @@ const CheckBox: React.FC<CheckBoxProps> = ({
   const [isDisabled, setIsDisabled] = useState(disabled);
 
   return (
-    <div className="checkbox__container">
-      <input
-        className="checkbox__input"
-        type="checkbox"
-        id={label}
-        checked={isChecked}
-        disabled={isDisabled}
-        onChange={(event) => {
-          setIsChecked(!isChecked);
-          onCheckboxChange && onCheckboxChange(event);
-        }}
-        onClick={onCheckboxClick}
-        onFocus={onCheckboxFocus}
-        onBlur={onCheckboxBlur}
-      />
-    </div>
+    <input
+      className="checkbox__input"
+      type="checkbox"
+      id={label}
+      checked={isChecked}
+      disabled={isDisabled}
+      onChange={(event) => {
+        setIsChecked(!isChecked);
+        onCheckboxChange && onCheckboxChange(event);
+        console.log('onChange');
+      }}
+      onClick={onCheckboxClick}
+      onFocus={onCheckboxFocus}
+      onBlur={onCheckboxBlur}
+    />
   );
 };
 
