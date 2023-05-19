@@ -16,7 +16,7 @@
         "all": true
       },
       "fs": {
-        "scope": ["$DESKTOP\\TEST\\*", "*"],
+        "scope": ["$DESKTOP\\TEST\\*", "/home/**/*"],
         "all": true,
         "readFile": true,
         "writeFile": true,
