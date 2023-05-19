@@ -1,3 +1,3 @@
 export interface SwitchProps {
-  color: string,
+  color: string;
 }

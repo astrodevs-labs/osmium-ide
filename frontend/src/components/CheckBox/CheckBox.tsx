@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import Label from '../Label/Label';
 import './CheckBox.css';
 import { CheckBoxProps } from './CheckBox.types';
-import Icon from '../Icon/Icon';
 
 const CheckBox: React.FC<CheckBoxProps> = ({
   label,
