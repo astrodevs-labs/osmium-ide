@@ -1,4 +1,1 @@
-import React from 'react';
-
-export interface LeftBarProps {
-}
+export interface LeftBarProps {}
