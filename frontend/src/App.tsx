@@ -1,6 +1,6 @@
 import Toolbar from './components/Toolbar/Toolbar';
 import { useState } from 'react';
-import { Button, Icon, Folder, LeftBar, CheckBox } from './components/Components';
+import { Button, CheckBox, Folder, Icon, LeftBar } from './components/Components';
 import Card from './components/Card/Card';
 
 const data = {
