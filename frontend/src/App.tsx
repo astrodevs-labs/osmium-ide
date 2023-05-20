@@ -1,6 +1,6 @@
 import Toolbar from './components/Toolbar/Toolbar';
 import { useState } from 'react';
-import { Button, CheckBox, Folder, Icon, LeftBar } from './components/Components';
+import { Button, CheckBox, Folder, Icon, LeftBar, Switch } from './components/Components';
 import Card from './components/Card/Card';
 
 const data = {
@@ -63,6 +63,7 @@ const App = () => {
             <Folder name={data.name} isFolder={data.isFolder} items={data.items} />
           </Card>
           <CheckBox label={'test'} checked={false} />
+          <Switch onClick={() => { console.log("onClick") }} disabled />
         </div>
       </div>
     </div>
