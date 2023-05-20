@@ -1,3 +1,4 @@
 export interface SwitchProps {
-  color: string;
+  onClick: Function;
+  disabled?: boolean;
 }
