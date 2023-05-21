@@ -6,5 +6,6 @@ import Icon from './Icon/Icon';
 import Folder from './Folder/Folder';
 import LeftBar from './LeftBar/LeftBar';
 import Switch from './Switch/Switch';
+import TextArea from './TextArea/TextArea';
 
-export { Button, CheckBox, Label, Toolbar, Icon, Folder, LeftBar, Switch };
+export { Button, CheckBox, Label, Toolbar, Icon, Folder, LeftBar, Switch, TextArea };
