@@ -1,6 +1,6 @@
 import { NotificationProps } from './Notification.types';
 
-const Notification: React.FC<NotificationProps> = ({ setIsvisible, color }) => {
+const Notification: React.FC<NotificationProps> = ({ color }) => {
   return (
     <div className='fixed bottom-10 right-0'>
       <div className="h-full text-white flex flex-row">
@@ -8,7 +8,7 @@ const Notification: React.FC<NotificationProps> = ({ setIsvisible, color }) => {
           <h1 className='flex flex-row-reverse'>Title</h1>
           <h1 className='flex flex-row-reverse text-[#727272]'>description</h1>
         </div>
-        <div className="bg-osmium-error w-2 h-20 rounded-r-lg" />
+        <div className={`${color} w-2 h-20 rounded-r-lg`} />
       </div>
     </div>
   );
