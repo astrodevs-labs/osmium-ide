@@ -70,7 +70,7 @@ const App = () => {
               <CheckBox label={'test'} checked={false} />
               <Switch onClick={() => { console.log("onClick"); }} disabled />
               {popUpIsVIsible ? <PopUp setIsvisible={setpopUpIsVIsible} color='bg-osmium-error' /> : null}
-              {notificationIsVIsible ? <Notification setIsvisible={setNotificationIsVIsible} color='bg-osmium-error' /> : null}
+              {notificationIsVIsible ? <Notification color='bg-osmium-error' /> : null}
             </>
           }
         </div>
