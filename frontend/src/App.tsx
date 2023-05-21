@@ -1,6 +1,6 @@
 import Toolbar from './components/Toolbar/Toolbar';
 import { useState } from 'react';
-import { Button, CheckBox, Folder, Icon, LeftBar, Switch, TextArea } from './components/Components';
+import { Button, CheckBox, Folder, Icon, LeftBar, Switch, TextArea, PopUp } from './components/Components';
 import Card from './components/Card/Card';
 
 const data = {
@@ -40,6 +40,7 @@ const data = {
 const App = () => {
   const [content, setContent] = useState<string>('');
   const [textAreaIsVisible, setTextAreaIsVisible] = useState<boolean>(false);
+  const [popUpIsVIsible, setpopUpIsVIsible] = useState<boolean>(false);
   return (
     <div className="w-full h-screen">
       <Toolbar content={'test'} setContent={setContent} />
@@ -51,6 +52,7 @@ const App = () => {
             <Button>1</Button>
             <Button disabled>2</Button>
             <Button onClick={() => { setTextAreaIsVisible(!textAreaIsVisible) }}>TextArea</Button>
+            <Button onClick={() => { setpopUpIsVIsible(!popUpIsVIsible) }}>popup</Button>
             <Icon icon={'arrow-up'} size={64} fill="white" viewBox="0 0 1024 1024" />
             <Icon icon={'arrow-down'} size={64} fill="white" viewBox="0 0 1024 1024" />
           </div>
@@ -62,7 +64,11 @@ const App = () => {
             </Card><br /><Card title="Card title" subtitle="Card subtitle" disabled={true}>
                 <div>Card content</div>
                 <Folder name={data.name} isFolder={data.isFolder} items={data.items} />
-              </Card><CheckBox label={'test'} checked={false} /><Switch onClick={() => { console.log("onClick"); }} disabled /></>
+              </Card>
+              <CheckBox label={'test'} checked={false} />
+              <Switch onClick={() => { console.log("onClick"); }} disabled />
+              {popUpIsVIsible ? <PopUp setIsvisible={setpopUpIsVIsible} color='bg-osmium-error' /> : null}
+            </>
           }
         </div>
       </div>
