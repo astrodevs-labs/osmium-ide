@@ -8,5 +8,6 @@ import LeftBar from './LeftBar/LeftBar';
 import Switch from './Switch/Switch';
 import TextArea from './TextArea/TextArea';
 import PopUp from './PopUp/PopUp';
+import Notification from './Notification/Notification';
 
-export { Button, CheckBox, Label, Toolbar, Icon, Folder, LeftBar, Switch, TextArea, PopUp };
+export { Button, CheckBox, Label, Toolbar, Icon, Folder, LeftBar, Switch, TextArea, PopUp, Notification };
