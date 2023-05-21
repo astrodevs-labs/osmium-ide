@@ -1,6 +1,6 @@
 import Toolbar from './components/Toolbar/Toolbar';
 import { useState } from 'react';
-import { Button, CheckBox, Folder, Icon, LeftBar, Switch, TextArea, PopUp } from './components/Components';
+import { Button, CheckBox, Folder, Icon, LeftBar, Switch, TextArea, PopUp, Notification } from './components/Components';
 import Card from './components/Card/Card';
 
 const data = {
@@ -41,6 +41,7 @@ const App = () => {
   const [content, setContent] = useState<string>('');
   const [textAreaIsVisible, setTextAreaIsVisible] = useState<boolean>(false);
   const [popUpIsVIsible, setpopUpIsVIsible] = useState<boolean>(false);
+  const [notificationIsVIsible, setNotificationIsVIsible] = useState<boolean>(false);
   return (
     <div className="w-full h-screen">
       <Toolbar content={'test'} setContent={setContent} />
@@ -53,6 +54,7 @@ const App = () => {
             <Button disabled>2</Button>
             <Button onClick={() => { setTextAreaIsVisible(!textAreaIsVisible) }}>TextArea</Button>
             <Button onClick={() => { setpopUpIsVIsible(!popUpIsVIsible) }}>popup</Button>
+            <Button onClick={() => { setNotificationIsVIsible(!notificationIsVIsible) }}>notification</Button>
             <Icon icon={'arrow-up'} size={64} fill="white" viewBox="0 0 1024 1024" />
             <Icon icon={'arrow-down'} size={64} fill="white" viewBox="0 0 1024 1024" />
           </div>
@@ -68,6 +70,7 @@ const App = () => {
               <CheckBox label={'test'} checked={false} />
               <Switch onClick={() => { console.log("onClick"); }} disabled />
               {popUpIsVIsible ? <PopUp setIsvisible={setpopUpIsVIsible} color='bg-osmium-error' /> : null}
+              {notificationIsVIsible ? <Notification setIsvisible={setNotificationIsVIsible} color='bg-osmium-error' /> : null}
             </>
           }
         </div>
