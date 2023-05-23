@@ -133,8 +133,8 @@ const App = () => {
                 }}
                 disabled
               />
-              {popUpIsVIsible ? <PopUp setIsvisible={setpopUpIsVIsible} color="bg-osmium-error" /> : null}
-              {notificationIsVIsible ? <Notification color="bg-osmium-error" /> : null}
+              {popUpIsVIsible && <PopUp setIsVisible={setpopUpIsVIsible} status="success" />}
+              {notificationIsVIsible && <Notification status="warning" />}
             </>
           )}
         </div>
