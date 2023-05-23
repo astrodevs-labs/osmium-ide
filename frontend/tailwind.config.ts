@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -16,10 +13,10 @@ export default {
         'osmium-text': '#E6E6E6',
         'osmium-warning': '#C58200',
         'osmium-error': '#8E0000',
-        'osmium-sucess': '#009E10',
+        'osmium-success': '#009E10',
         'osmium-grey': '#999999',
-      },},
+      },
+    },
   },
   plugins: [],
-}
-
+};

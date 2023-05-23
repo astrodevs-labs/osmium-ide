@@ -1,4 +1,6 @@
+import React from 'react';
+
 export interface PopUpProps {
-  setIsvisible: Function;
-  color: string;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  status: 'success' | 'error' | 'warning' | 'info';
 }
