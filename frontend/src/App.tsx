@@ -1,6 +1,17 @@
 import Toolbar from './components/Toolbar/Toolbar';
 import { useState } from 'react';
-import { Button, CheckBox, Folder, Icon, LeftBar, Switch, TextArea, PopUp, Notification } from './components/Components';
+import {
+  Button,
+  CheckBox,
+  Folder,
+  Icon,
+  LeftBar,
+  Notification,
+  PopUp,
+  Switch,
+  TabsBar,
+  TextArea,
+} from './components/Components';
 import Card from './components/Card/Card';
 
 const data = {
@@ -48,31 +59,80 @@ const App = () => {
       <div className="w-full h-full flex row">
         <LeftBar></LeftBar>
         <div className="w-full h-full">
+          <TabsBar
+            fileList={[
+              'teseeeet.sol',
+              'test2.sol',
+              'teseeeeet3.sol',
+              'test2.sol',
+              'teseeeeet3.sol',
+              'test2.sol',
+              'teseeeeet3.sol',
+              'test2.sol',
+              'teseeeeet3.sol',
+              'test2.sol',
+              'teseeeeet3.sol',
+              'test2.sol',
+              'teseeeeet3.sol',
+              'test2.sol',
+              'teseeeeet3.sol',
+              'test2.sol',
+              'teseeeeet3.sol',
+            ]}
+          />
           <br />
           <div className="grid grid-cols-3 gap-4">
             <Button>1</Button>
             <Button disabled>2</Button>
-            <Button onClick={() => { setTextAreaIsVisible(!textAreaIsVisible) }}>TextArea</Button>
-            <Button onClick={() => { setpopUpIsVIsible(!popUpIsVIsible) }}>popup</Button>
-            <Button onClick={() => { setNotificationIsVIsible(!notificationIsVIsible) }}>notification</Button>
+            <Button
+              onClick={() => {
+                setTextAreaIsVisible(!textAreaIsVisible);
+              }}
+            >
+              TextArea
+            </Button>
+            <Button
+              onClick={() => {
+                setpopUpIsVIsible(!popUpIsVIsible);
+              }}
+            >
+              popup
+            </Button>
+            <Button
+              onClick={() => {
+                setNotificationIsVIsible(!notificationIsVIsible);
+              }}
+            >
+              notification
+            </Button>
             <Icon icon={'arrow-up'} size={64} fill="white" viewBox="0 0 1024 1024" />
             <Icon icon={'arrow-down'} size={64} fill="white" viewBox="0 0 1024 1024" />
           </div>
           <br />
-          {textAreaIsVisible ? <TextArea content={content} setContent={setContent} /> :
-            <><Card title="Card title" subtitle="Card subtitle">
-              <div>Card content</div>
-              <Folder name={data.name} isFolder={data.isFolder} items={data.items} />
-            </Card><br /><Card title="Card title" subtitle="Card subtitle" disabled={true}>
+          {textAreaIsVisible ? (
+            <TextArea content={content} setContent={setContent} />
+          ) : (
+            <>
+              <Card title="Card title" subtitle="Card subtitle">
+                <div>Card content</div>
+                <Folder name={data.name} isFolder={data.isFolder} items={data.items} />
+              </Card>
+              <br />
+              <Card title="Card title" subtitle="Card subtitle" disabled={true}>
                 <div>Card content</div>
                 <Folder name={data.name} isFolder={data.isFolder} items={data.items} />
               </Card>
               <CheckBox label={'test'} checked={false} />
-              <Switch onClick={() => { console.log("onClick"); }} disabled />
-              {popUpIsVIsible ? <PopUp setIsvisible={setpopUpIsVIsible} color='bg-osmium-error' /> : null}
-              {notificationIsVIsible ? <Notification color='bg-osmium-error' /> : null}
+              <Switch
+                onClick={() => {
+                  console.log('onClick');
+                }}
+                disabled
+              />
+              {popUpIsVIsible ? <PopUp setIsvisible={setpopUpIsVIsible} color="bg-osmium-error" /> : null}
+              {notificationIsVIsible ? <Notification color="bg-osmium-error" /> : null}
             </>
-          }
+          )}
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ const Switch: React.FC<SwitchProps> = ({ onClick, disabled }) => {
 
   return (
     <svg
-      className={`${switchSate ? `fill-osmium-bgLight rotate-180` : "fill-osmium-primary"} hover:fill-white`}
+      className={`${switchSate ? `fill-osmium-bgLight rotate-180` : 'fill-osmium-primary'} hover:fill-white`}
       width="64"
       height="64"
       viewBox="0 0 32 32"
