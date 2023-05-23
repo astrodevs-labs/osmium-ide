@@ -1,3 +1,3 @@
 export interface NotificationProps {
-  color: string;
+  status: 'success' | 'error' | 'warning' | 'info';
 }
