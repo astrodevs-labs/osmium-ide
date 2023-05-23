@@ -35,3 +35,23 @@
         background: #3E4E5C;
     }
 }
+
+.titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    padding: 0 10px;
+    background: #1A1E25;
+    -webkit-app-region: drag;
+}
+.titlebar-button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3E4E5C;
+    -webkit-app-region: no-drag;
+}
+.titlebar-button:hover {
+    background: #4E5E6C;
+}
