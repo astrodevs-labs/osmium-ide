@@ -1,4 +1,4 @@
 export interface TextAreaProps {
-  content: string,
-  setContent: Function,
+  content: string;
+  setContent: Function;
 }

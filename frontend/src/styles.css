@@ -21,3 +21,17 @@
     padding: 0;
     margin: 0;
 }
+
+@layer utilities {
+    .scrollbar::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        background: #1A1E25;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        background: #3E4E5C;
+    }
+}
