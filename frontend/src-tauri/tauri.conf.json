@@ -28,6 +28,17 @@
         "renameFile": true,
         "exists": true
       },
+      "window": {
+        "all": false,
+        "close": true,
+        "hide": true,
+        "show": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "startDragging": true
+      },
       "all": false,
       "shell": {
         "all": false,
@@ -58,7 +69,8 @@
         "resizable": true,
         "title": "OsmiumIDE",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "decorations": false
       }
     ]
   }
