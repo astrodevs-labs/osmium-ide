@@ -1,4 +1,4 @@
 export interface PopUpProps {
-  setIsvisible: Function,
-  color: string,
+  setIsvisible: Function;
+  color: string;
 }
