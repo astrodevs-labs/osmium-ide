@@ -77,9 +77,10 @@ const data = {
 
 const App = () => {
   return (
-    <>
+    // the app must be in a full height and width div flexed to center the app
+    <div className="h-full w-full">
       <ComponentsBuilder data={data.windows[0].elements.root.data} children={data.windows[0].elements.root.children} />
-    </>
+    </div>
   );
 };
 
