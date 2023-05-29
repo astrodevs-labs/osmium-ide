@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonProps } from './Button.types';
 
-const Button: React.FC<ButtonProps> = ({ onClick, disabled, children, className }) => {
+const Button: React.FC<ButtonProps> = ({ onClick, disabled, children = undefined, className, value = undefined }) => {
   return (
     <button
       className={
@@ -12,8 +12,9 @@ const Button: React.FC<ButtonProps> = ({ onClick, disabled, children, className 
       }
       onClick={onClick}
       disabled={disabled}
+      value={value}
     >
-      {children}
+      {value || children}
     </button>
   );
 };
