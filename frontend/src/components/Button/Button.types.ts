@@ -5,4 +5,5 @@ export interface ButtonProps {
   disabled?: boolean;
   children?: React.ReactNode;
   className?: string;
+  value?: string;
 }
