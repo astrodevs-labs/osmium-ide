@@ -1,10 +1,6 @@
 import { appWindow } from '@tauri-apps/api/window';
 import ComponentsBuilder from './builder/ComponentsBuilder';
 
-document.getElementById('titlebar-minimize')?.addEventListener('click', () => appWindow.minimize());
-document.getElementById('titlebar-maximize')?.addEventListener('click', () => appWindow.toggleMaximize());
-document.getElementById('titlebar-close')?.addEventListener('click', () => appWindow.close());
-
 const data = {
   windows: [
     {
@@ -76,9 +72,40 @@ const data = {
 };
 
 const App = () => {
+  const minimize = () => {
+    appWindow.minimize();
+  };
+
+  const maximize = () => {
+    appWindow.isMaximized().then((maximized) => {
+      if (maximized) {
+        appWindow.unmaximize();
+      } else {
+        appWindow.maximize();
+      }
+    });
+  };
+
+  const close = () => {
+    appWindow.close();
+  };
+
   return (
-    // the app must be in a full height and width div flexed to center the app
     <div className="h-full w-full">
+      <div data-tauri-drag-region className="titlebar">
+        <div className="titlebar-title">OsmiumIDE</div>
+        <div className="titlebar-button-container">
+          <div className="titlebar-button" id="titlebar-minimize" onClick={minimize}>
+            <img src="https://api.iconify.design/mdi:window-minimize.svg?color=%23ffffff" alt="minimize" />
+          </div>
+          <div className="titlebar-button" id="titlebar-maximize" onClick={maximize}>
+            <img src="https://api.iconify.design/mdi:window-maximize.svg?color=%23ffffff" alt="maximize" />
+          </div>
+          <div className="titlebar-button" id="titlebar-close" onClick={close}>
+            <img src="https://api.iconify.design/mdi:close.svg?color=%23ffffff" alt="close" />
+          </div>
+        </div>
+      </div>
       <ComponentsBuilder data={data.windows[0].elements.root.data} children={data.windows[0].elements.root.children} />
     </div>
   );
