@@ -1,0 +1,60 @@
+name: Create branch and draft
+
+on:
+  repository_dispatch:
+    types: [create-branch-and-draft]
+
+jobs:
+  create-branch-and-draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check if branch exists
+        id: check-branch-exists
+        continue-on-error: true
+        # should check if branch exists and set branchExists=true if it does, otherwise branchExists=false
+        run: |
+          git fetch --all
+          git checkout ${{ github.event.client_payload.headBranch }}
+          echo "branchExists=true" >> $GITHUB_OUTPUT
+          echo "Branch exists"
+
+
+      - name: Create branch
+        id: create-branch
+        # if branch does not exist, create it
+        if: steps.check-branch-exists.outputs.branchExists != 'true'
+        run: |
+          git checkout -b ${{ github.event.client_payload.headBranch }}
+          git config --global user.email "ci@astrodevslabs.io" && git config --global user.name "Astrodevs CI"
+          git commit --allow-empty -m "chore: create branch ${{ github.event.client_payload.headBranch }}-staging"
+          git push origin ${{ github.event.client_payload.headBranch }}
+
+      - name: Check if PR exists
+        id: check-pr-exists
+        uses: actions/github-script@v6
+        env:
+          HEAD_BRANCH: ${{ github.event.client_payload.headBranch }}
+          BASE_BRANCH: ${{ github.event.client_payload.baseBranch }}
+        with: 
+          github-token: ${{ secrets.ADMIN_PAT }}
+          script: |
+            const { data: pullRequests } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: `${context.repo.owner}:${process.env.HEAD_BRANCH}`,
+              base: `${context.repo.owner}:${process.env.BASE_BRANCH}`,
+            });
+            const res = pullRequests.length > 0;
+            return {
+              prExists: res.toString(),
+            };
+
+      - name: Create pull request
+        if: steps.check-pr-exists.outputs.result.prExists != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.ADMIN_PAT }}
+        run: |
+          gh pr create --title "${{ github.event.client_payload.prTitle }}" --body "Solves #${{ github.event.client_payload.issueNumber }}" --base ${{github.event.client_payload.baseBranch }} --head ${{github.event.client_payload.headBranch }} --repo ${{ github.event.repository.full_name }} --draft
