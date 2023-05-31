@@ -9,8 +9,8 @@ file(GLOB_RECURSE ICLS include/*.hpp)
 add_library(backend-core ${SRCS} ${ICLS})
 target_include_directories(backend-core PUBLIC include)
 
-
-if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR} OR OSMIUM_TESTS_ENABLED)
+option(OSMIUM_TESTS_ENABLED "Enable tests" OFF)
+if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR} OR ${OSMIUM_TESTS_ENABLED})
     include(tests/cmake/FindGoogleTest.cmake)
     enable_testing()
 
