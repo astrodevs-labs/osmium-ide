@@ -5,13 +5,13 @@ set(CMAKE_CXX_STANDARD 20)
 # Set to ON to enable tests targets
 set(OSMIUM_TESTS_ENABLED ON)
 
-set(modules "")
+set(modules "frontCommunication")
 
 set(LIBRARY_OUTPUT_PATH ..)
 
-
 # subfolders for  modules
 foreach(module ${modules})
+
     add_subdirectory(${module})
 endforeach()
 
