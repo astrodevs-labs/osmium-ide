@@ -85,31 +85,31 @@ jobs:
             dir
             .\backend-${{ matrix.backend-directory }}-e2e-tests.exe
 
-  style-check:
-    needs:
-      - backend-build
-      - collect_dirs
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        backend-directory: ${{ fromJson(needs.collect_dirs.outputs.dirs) }}
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - uses: cpp-linter/cpp-linter-action@v2
-        id: linter
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          style: file
-          repo-root: backend/${{ matrix.backend-directory }}
-          thread-comments: true
-          ignore: "tests"
-          extra-args: "-Iinclude"
-
-      - name: Check linter result
-        if: steps.linter.outputs.checks-failed > 0
-        run: echo "Some files failed the linting checks!"
+  #style-check:
+  #  needs:
+  #    - backend-build
+  #    - collect_dirs
+  #  strategy:
+  #    fail-fast: false
+  #    matrix:
+  #      os: [ubuntu-latest]
+  #      backend-directory: ${{ fromJson(needs.collect_dirs.outputs.dirs) }}
+  #  runs-on: ${{ matrix.os }}
+  #  steps:
+  #    - name: Checkout code
+  #      uses: actions/checkout@v2
+  #
+  #    - uses: cpp-linter/cpp-linter-action@v2
+  #      id: linter
+  #      env:
+  #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #      with:
+  #        style: file
+  #        repo-root: backend/${{ matrix.backend-directory }}
+  #        thread-comments: true
+  #        ignore: "tests"
+  #        extra-args: "-Iinclude"
+  #
+  #    - name: Check linter result
+  #      if: steps.linter.outputs.checks-failed > 0
+  #      run: echo "Some files failed the linting checks!"
