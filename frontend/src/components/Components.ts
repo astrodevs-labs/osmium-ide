@@ -7,7 +7,7 @@ import Switch from './Switch/Switch';
 import TextArea from './TextArea/TextArea';
 import PopUp from './PopUp/PopUp';
 import Notification from './Notification/Notification';
-import Tab from './Tab/Tab';
+import Tab from './TabsBar/Tab';
 import TabsBar from './TabsBar/TabsBar';
 import Sidebar from './Sidebar/Sidebar';
 import SidebarItem from './Sidebar/SidebarItem';

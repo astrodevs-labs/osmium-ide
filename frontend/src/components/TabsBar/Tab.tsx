@@ -1,7 +1,11 @@
-import { TabProps } from './Tab.types';
 import { FC, useState } from 'react';
 
-const Tab: FC<TabProps> = ({ file, onClick, active }) => {
+interface TabProps {
+  title: string;
+  active: boolean;
+}
+
+const Tab: FC<TabProps> = ({ title, active }) => {
   const [hover, setHover] = useState<boolean>(false);
   return (
     <div
@@ -12,9 +16,11 @@ const Tab: FC<TabProps> = ({ file, onClick, active }) => {
       onMouseOut={() => {
         setHover(false);
       }}
-      onClick={onClick}
+      onClick={() => {
+        console.log('click');
+      }}
     >
-      <h1 className="select-none">{file}</h1>
+      <h1 className="select-none">{title}</h1>
       {active ? (
         <div className="bg-osmium-primary w-full h-1 absolute bottom-0 left-0" />
       ) : hover ? (
