@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, LeftBar } from '../components/Components';
+import { Button, Sidebar, SidebarItem, SidebarPanel } from '../components/Components';
 
 interface PropertyType {
   name: string;
@@ -14,7 +14,9 @@ export interface NodeType {
 
 const componentTypes = {
   button: Button,
-  sidebar: LeftBar,
+  sidebar: Sidebar,
+  'sidebar-item': SidebarItem,
+  'sidebar-panel': SidebarPanel,
 };
 
 const ComponentsBuilder: React.FC<{ node: NodeType }> = ({ node }) => {
