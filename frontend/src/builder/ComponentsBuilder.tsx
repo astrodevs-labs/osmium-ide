@@ -1,5 +1,14 @@
 import React from 'react';
-import { Button, Sidebar, SidebarItem, SidebarPanel } from '../components/Components';
+import {
+  Button,
+  Canvas,
+  FileHierarchy,
+  Folder,
+  Sidebar,
+  SidebarItem,
+  SidebarPanel,
+  Root,
+} from '../components/Components';
 
 interface PropertyType {
   name: string;
@@ -17,6 +26,9 @@ const componentTypes = {
   sidebar: Sidebar,
   'sidebar-item': SidebarItem,
   'sidebar-panel': SidebarPanel,
+  'file-hierarchy': FileHierarchy,
+  canvas: Canvas,
+  root: Root,
 };
 
 const ComponentsBuilder: React.FC<{ node: NodeType }> = ({ node }) => {
