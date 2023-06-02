@@ -27,13 +27,32 @@ export const tree: NodeType = {
               name: 'icon',
               value: 'file',
             },
+            {
+              name: 'selected',
+              value: true,
+            },
+          ],
+          children: [],
+        },
+        {
+          id: '4',
+          type: 'sidebar-item',
+          properties: [
+            {
+              name: 'title',
+              value: 'Files',
+            },
+            {
+              name: 'icon',
+              value: 'zoom',
+            },
           ],
           children: [],
         },
       ],
     },
     {
-      id: '4',
+      id: '5',
       type: 'canvas',
       properties: [],
       children: [],
