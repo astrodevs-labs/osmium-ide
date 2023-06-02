@@ -10,7 +10,7 @@
 
 extern "C" {
     const char *getModuleName() {
-        return "inputModule";
+        return "frontCommunicationModule";
     }
 
     void *createModule(std::shared_ptr<core::MessagingInterface> msg) {
