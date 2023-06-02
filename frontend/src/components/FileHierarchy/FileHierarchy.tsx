@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import { FolderProps } from '../Folder/Folder.types';
 import { Icon } from '../Components';
 
 interface Item {
