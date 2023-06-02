@@ -7,19 +7,17 @@ interface SideBarProps {
 
 const Sidebar: FC<SideBarProps> = ({ children }) => {
   return (
-    <div className="h-full flex fixed bg-amber-400">
-      <div className="flex-col bg-osmium-error">
+    <div className="h-full flex">
+      <div className="flex-col border-r border-osmium-bgLight">
         {children &&
           children
             // @ts-ignore
             .filter((child) => child.props.node.type === 'sidebar-item')}
       </div>
-      <div className="flex-col bg-blue-500">
-        {children &&
-          children
-            // @ts-ignore
-            .filter((child) => child.props.node.type === 'sidebar-panel')}
-      </div>
+      {children &&
+        children
+          // @ts-ignore
+          .filter((child) => child.props.node.type === 'sidebar-panel')}
     </div>
   );
 };
