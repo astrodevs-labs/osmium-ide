@@ -1,19 +1,15 @@
-import React, { JSX } from 'react';
+import React from 'react';
 import { Button, LeftBar } from '../components/Components';
-import Card from '../components/Card/Card';
 
-interface StateType {
-  id: string;
-  value: string | number | boolean;
+interface PropertyType {
+  name: string;
+  value: any;
 }
-interface DataType {
+export interface NodeType {
+  id: string;
   type: string;
-  id: string;
-  state: StateType[];
-}
-interface ElementType {
-  data: DataType;
-  children: ElementType[];
+  properties: PropertyType[];
+  children: NodeType[];
 }
 
 const componentTypes = {
@@ -21,32 +17,29 @@ const componentTypes = {
   sidebar: LeftBar,
 };
 
-const ComponentsBuilder: React.FC<ElementType> = ({ data, children }) => {
+const ComponentsBuilder: React.FC<{ node: NodeType }> = ({ node }) => {
+  console.log(node);
   // @ts-ignore
-  const Component = componentTypes[data.type];
-
-  // transform state array to object
-  const state = data.state.reduce((acc: any, curr: StateType) => {
-    acc[curr.id] = curr.value;
+  const Component = componentTypes[node.type];
+  const state = node.properties.reduce((acc: any, curr: PropertyType) => {
+    acc[curr.name] = curr.value;
     return acc;
   }, {});
 
-  console.log(state);
-
   if (Component === undefined) {
-    console.error(`Failed to load component with type ${data.type}`);
+    console.error(`Failed to load component with type ${node.type}`);
     return (
-      <div id={data.id} {...state}>
-        {children.map((child) => (
-          <ComponentsBuilder data={child.data} children={child.children} key={child.data.id} />
+      <div id={node.id} {...state}>
+        {node.children.map((child) => (
+          <ComponentsBuilder node={child} key={child.id} />
         ))}
       </div>
     );
   }
   return (
-    <Component id={data.id} {...state}>
-      {children.map((child) => (
-        <ComponentsBuilder data={child.data} children={child.children} key={child.data.id} />
+    <Component id={node.id} {...state}>
+      {node.children.map((child) => (
+        <ComponentsBuilder node={child} key={child.id} />
       ))}
     </Component>
   );
