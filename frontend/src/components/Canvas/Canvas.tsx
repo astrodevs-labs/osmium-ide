@@ -1,9 +1,5 @@
 const Canvas = () => {
-  return (
-    <div className="w-full h-full">
-      <h1>Canvas</h1>
-    </div>
-  );
+  return <div className="w-full h-full" />;
 };
 
 export default Canvas;

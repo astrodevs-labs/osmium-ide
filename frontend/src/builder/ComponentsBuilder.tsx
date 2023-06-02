@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  Canvas,
-  FileHierarchy,
-  Folder,
-  Sidebar,
-  SidebarItem,
-  SidebarPanel,
-  Root,
-} from '../components/Components';
+import { Button, Canvas, FileHierarchy, Sidebar, SidebarItem, SidebarPanel, Root } from '../components/Components';
 
 interface PropertyType {
   name: string;

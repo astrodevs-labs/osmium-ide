@@ -1,4 +1,3 @@
-import Icon from '../Icon/Icon';
 import React, { FC } from 'react';
 
 interface SideBarProps {
