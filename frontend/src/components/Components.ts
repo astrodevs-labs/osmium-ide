@@ -13,6 +13,9 @@ import TabsBar from './TabsBar/TabsBar';
 import Sidebar from './Sidebar/Sidebar';
 import SidebarItem from './Sidebar/SidebarItem';
 import SidebarPanel from './Sidebar/SidebarPanel';
+import FileHierarchy from './FileHierarchy/FileHierarchy';
+import Canvas from './Canvas/Canvas';
+import Root from './Root/Root';
 
 export {
   Button,
@@ -30,4 +33,7 @@ export {
   Sidebar,
   SidebarItem,
   SidebarPanel,
+  FileHierarchy,
+  Canvas,
+  Root,
 };
