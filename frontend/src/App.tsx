@@ -1,82 +1,13 @@
 import { appWindow } from '@tauri-apps/api/window';
 import ComponentsBuilder from './builder/ComponentsBuilder';
-
-const data = {
-  windows: [
-    {
-      elements: {
-        root: {
-          data: {
-            type: 'root',
-            id: '1',
-            state: [
-              {
-                id: 'prop1',
-                value: 'value1',
-              },
-              {
-                id: 'prop2',
-                value: 2,
-              },
-            ],
-          },
-          children: [
-            {
-              data: {
-                type: 'sidebar',
-                id: '2',
-                state: [
-                  {
-                    id: 'collapsed',
-                    value: true,
-                  },
-                ],
-              },
-              children: [],
-            },
-            {
-              data: {
-                type: 'button',
-                id: '3',
-                state: [
-                  {
-                    id: 'value',
-                    value: 'HEY',
-                  },
-                ],
-              },
-              children: [],
-            },
-            {
-              data: {
-                type: 'button',
-                id: '4',
-                state: [
-                  {
-                    id: 'value',
-                    value: 'test',
-                  },
-                  {
-                    id: 'disabled',
-                    value: 'true',
-                  },
-                ],
-              },
-              children: [],
-            },
-          ],
-        },
-      },
-    },
-  ],
-};
+import { tree, tree2 } from './tree';
 
 const App = () => {
-  const minimize = () => {
-    appWindow.minimize();
+  const minimize = async () => {
+    await appWindow.minimize();
   };
 
-  const maximize = () => {
+  const maximize = async () => {
     appWindow.isMaximized().then((maximized) => {
       if (maximized) {
         appWindow.unmaximize();
@@ -86,8 +17,8 @@ const App = () => {
     });
   };
 
-  const close = () => {
-    appWindow.close();
+  const close = async () => {
+    await appWindow.close();
   };
 
   return (
@@ -106,7 +37,7 @@ const App = () => {
           </div>
         </div>
       </div>
-      <ComponentsBuilder data={data.windows[0].elements.root.data} children={data.windows[0].elements.root.children} />
+      <ComponentsBuilder node={tree2} />
     </div>
   );
 };
