@@ -400,7 +400,7 @@ export const tree3: NodeType = {
           properties: [
             {
               name: 'content',
-              value: 'b64 encoded file content\ne',
+              value: 'YXdlc29tZSBjb2Rl',
             },
           ],
           children: [],
