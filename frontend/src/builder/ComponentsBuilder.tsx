@@ -9,6 +9,7 @@ import {
   Root,
   TabsBar,
   Tab,
+  Editor,
 } from '../components/Components';
 
 interface PropertyType {
@@ -32,6 +33,7 @@ const componentTypes = {
   root: Root,
   'tabs-bar': TabsBar,
   tab: Tab,
+  editor: Editor,
 };
 
 const ComponentsBuilder: React.FC<{ node: NodeType }> = ({ node }) => {
