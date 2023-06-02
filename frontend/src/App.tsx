@@ -1,6 +1,6 @@
 import { appWindow } from '@tauri-apps/api/window';
 import ComponentsBuilder from './builder/ComponentsBuilder';
-import { tree, tree2 } from './tree';
+import { tree, tree2, tree3 } from './tree';
 
 const App = () => {
   const minimize = async () => {
@@ -37,7 +37,7 @@ const App = () => {
           </div>
         </div>
       </div>
-      <ComponentsBuilder node={tree} />
+      <ComponentsBuilder node={tree3} />
     </div>
   );
 };

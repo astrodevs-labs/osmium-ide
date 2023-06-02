@@ -1,5 +1,15 @@
 import React from 'react';
-import { Button, Canvas, FileHierarchy, Sidebar, SidebarItem, SidebarPanel, Root } from '../components/Components';
+import {
+  Button,
+  Canvas,
+  FileHierarchy,
+  Sidebar,
+  SidebarItem,
+  SidebarPanel,
+  Root,
+  TabsBar,
+  Tab,
+} from '../components/Components';
 
 interface PropertyType {
   name: string;
@@ -20,6 +30,8 @@ const componentTypes = {
   'file-hierarchy': FileHierarchy,
   canvas: Canvas,
   root: Root,
+  'tabs-bar': TabsBar,
+  tab: Tab,
 };
 
 const ComponentsBuilder: React.FC<{ node: NodeType }> = ({ node }) => {
