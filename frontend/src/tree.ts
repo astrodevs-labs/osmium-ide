@@ -332,6 +332,66 @@ export const tree3: NodeType = {
               ],
               children: [],
             },
+            {
+              id: '10',
+              type: 'tab',
+              properties: [
+                {
+                  name: 'title',
+                  value: 'script.js',
+                },
+                {
+                  name: 'active',
+                  value: false,
+                },
+              ],
+              children: [],
+            },
+            {
+              id: '10',
+              type: 'tab',
+              properties: [
+                {
+                  name: 'title',
+                  value: 'script.js',
+                },
+                {
+                  name: 'active',
+                  value: false,
+                },
+              ],
+              children: [],
+            },
+            {
+              id: '10',
+              type: 'tab',
+              properties: [
+                {
+                  name: 'title',
+                  value: 'script.js',
+                },
+                {
+                  name: 'active',
+                  value: false,
+                },
+              ],
+              children: [],
+            },
+            {
+              id: '10',
+              type: 'tab',
+              properties: [
+                {
+                  name: 'title',
+                  value: 'script.js',
+                },
+                {
+                  name: 'active',
+                  value: false,
+                },
+              ],
+              children: [],
+            },
           ],
         },
         {
@@ -340,7 +400,7 @@ export const tree3: NodeType = {
           properties: [
             {
               name: 'content',
-              value: 'b64 encoded file content',
+              value: 'b64 encoded file content\ne',
             },
           ],
           children: [],
