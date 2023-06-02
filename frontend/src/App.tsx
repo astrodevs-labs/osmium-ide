@@ -37,7 +37,7 @@ const App = () => {
           </div>
         </div>
       </div>
-      <ComponentsBuilder node={tree} />
+      <ComponentsBuilder node={tree2} />
     </div>
   );
 };

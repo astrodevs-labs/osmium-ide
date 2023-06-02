@@ -29,7 +29,7 @@ export const tree: NodeType = {
             },
             {
               name: 'selected',
-              value: true,
+              value: false,
             },
           ],
           children: [],
