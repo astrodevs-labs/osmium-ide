@@ -15,6 +15,7 @@ import SidebarPanel from './Sidebar/SidebarPanel';
 import FileHierarchy from './FileHierarchy/FileHierarchy';
 import Canvas from './Canvas/Canvas';
 import Root from './Root/Root';
+import Editor from './Editor/Editor';
 
 export {
   Button,
@@ -34,4 +35,5 @@ export {
   FileHierarchy,
   Canvas,
   Root,
+  Editor,
 };
