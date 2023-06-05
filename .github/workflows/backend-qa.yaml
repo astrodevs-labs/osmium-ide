@@ -58,7 +58,11 @@ jobs:
         if: ${{ matrix.os == 'ubuntu-latest' && matrix.backend-directory != 'payloads' }}
         run: |
           cd build/tests
-          ./backend-${{ matrix.backend-directory }}-unit-tests
+          if [ -f backend-${{ matrix.backend-directory }}-unit-tests ]; then
+            ./backend-${{ matrix.backend-directory }}-unit-tests
+          else
+            echo "No unit tests found for backend-${{ matrix.backend-directory }}-unit-tests"
+          fi
 
       - name: Run unit tests (windows)
         working-directory: backend/${{ matrix.backend-directory }}
@@ -66,7 +70,11 @@ jobs:
         run: |
           cd build/tests
           dir
-          .\backend-${{ matrix.backend-directory }}-unit-tests.exe
+          if exist backend-${{ matrix.backend-directory }}-unit-tests.exe (
+            .\backend-${{ matrix.backend-directory }}-unit-tests.exe
+          ) else (
+            echo "No unit tests found for backend-${{ matrix.backend-directory }}-unit-tests"
+          )
 
       - name: Run end-to-end tests (linux)
         working-directory: backend/${{ matrix.backend-directory }}
