@@ -46,6 +46,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Fetch submodules
+        run: git submodule update --init --recursive
+
       - name: Build tests target
         working-directory: backend/${{ matrix.backend-directory }}
         if: ${{ matrix.backend-directory != 'payloads'}}
