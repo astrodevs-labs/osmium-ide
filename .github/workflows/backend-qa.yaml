@@ -1,10 +1,7 @@
 name: Backend Testing
 
 on:
-  pull_request:
-    branches:
-      - main
-      - dev
+  pull_request
 
 jobs:
   backend-build:
@@ -51,20 +48,21 @@ jobs:
 
       - name: Build tests target
         working-directory: backend/${{ matrix.backend-directory }}
+        if: ${{ matrix.backend-directory != 'payloads'}}
         run: |
           cmake -S . -B build -DOSMIUM_TESTS_ENABLED=ON
           cmake --build build --target backend-${{ matrix.backend-directory }}-tests
 
       - name: Run unit tests (linux)
         working-directory: backend/${{ matrix.backend-directory }}
-        if: ${{ matrix.os == 'ubuntu-latest' }}
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.backend-directory != 'payloads' }}
         run: |
           cd build/tests
           ./backend-${{ matrix.backend-directory }}-unit-tests
 
       - name: Run unit tests (windows)
         working-directory: backend/${{ matrix.backend-directory }}
-        if: ${{ matrix.os == 'windows-latest' }}
+        if: ${{ matrix.os == 'windows-latest' && matrix.backend-directory != 'payloads' }}
         run: |
           cd build/tests
           dir
@@ -72,14 +70,14 @@ jobs:
 
       - name: Run end-to-end tests (linux)
         working-directory: backend/${{ matrix.backend-directory }}
-        if: ${{ matrix.os == 'ubuntu-latest' }}
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.backend-directory != 'payloads' }}
         run: |
             cd build/tests
             ./backend-${{ matrix.backend-directory }}-e2e-tests
 
       - name: Run end-to-end tests (windows)
         working-directory: backend/${{ matrix.backend-directory }}
-        if: ${{ matrix.os == 'windows-latest' && matrix.backend-directory != 'core' }}
+        if: ${{ matrix.os == 'windows-latest' && matrix.backend-directory != 'core' && matrix.backend-directory != 'payloads' }}
         run: |
             cd build/tests
             dir
