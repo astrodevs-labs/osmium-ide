@@ -22,7 +22,7 @@ endif()
 
 
 add_subdirectory(core)
-add_subdirectory(payload-library)
+add_subdirectory(payloads)
 
 
 add_executable(backend main.cpp)
