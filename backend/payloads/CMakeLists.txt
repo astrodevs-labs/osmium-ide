@@ -13,7 +13,7 @@ endif()
 
 file(GLOB_RECURSE sources "src/*.cpp" "include/*.hpp")
 
-add_library(payload-library
+add_library(backend-payloads
         ${sources}
         )
 
