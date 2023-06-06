@@ -9,11 +9,11 @@ file(GLOB_RECURSE ICLS include/*.hpp)
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
 
 set(TEST_FRONT_COMMUNICATION_NO_SSL ON)
-add_subdirectory(lib/uWebSockets)
+add_subdirectory(lib)
 
-add_library(backend-frontCommunication SHARED ${SRCS} ${ICLS} ${uWebSockets_SOURCES_FILES})
-target_include_directories(backend-frontCommunication PUBLIC include lib/uWebSockets/uWebSockets/src)
-target_link_libraries(backend-frontCommunication uSockets)
+add_library(backend-frontCommunication SHARED ${SRCS} ${ICLS})
+target_include_directories(backend-frontCommunication PUBLIC include)
+target_link_libraries(backend-frontCommunication uWebSockets)
 
 option(OSMIUM_TESTS_ENABLED "Enable tests" OFF)
 if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR} OR ${OSMIUM_TESTS_ENABLED})
