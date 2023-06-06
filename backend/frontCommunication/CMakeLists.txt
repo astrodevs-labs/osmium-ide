@@ -12,7 +12,8 @@ set(TEST_FRONT_COMMUNICATION_NO_SSL ON)
 add_subdirectory(lib/uWebSockets)
 
 add_library(backend-frontCommunication SHARED ${SRCS} ${ICLS} ${uWebSockets_SOURCES_FILES})
-target_include_directories(backend-frontCommunication PUBLIC include)
+target_include_directories(backend-frontCommunication PUBLIC include lib/uWebSockets/uWebSockets/src)
+target_link_libraries(backend-frontCommunication uSockets)
 
 option(OSMIUM_TESTS_ENABLED "Enable tests" OFF)
 if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR} OR ${OSMIUM_TESTS_ENABLED})
