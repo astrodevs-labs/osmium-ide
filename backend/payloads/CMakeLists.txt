@@ -16,4 +16,4 @@ file(GLOB_RECURSE sources "src/*.cpp" "include/*.hpp")
 add_library(backend-payloads
         ${sources}
         )
-
+target_include_directories(backend-payloads PUBLIC include)
