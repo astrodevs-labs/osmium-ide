@@ -6,6 +6,7 @@ on:
 jobs:
   backend-build:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
@@ -15,6 +16,18 @@ jobs:
 
       - name: Fetch submodules
         run: git submodule update --init --recursive
+
+      - name: install openssl
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get install libssl-dev
+      
+      - name: install openssl
+        if: matrix.os == 'macos-latest'
+        run: brew install openssl
+      
+      - name: install openssl
+        if: matrix.os == 'windows-latest'
+        run: choco install openssl.light
 
       - name: Build backend
         working-directory: backend
@@ -51,6 +64,18 @@ jobs:
 
       - name: Fetch submodules
         run: git submodule update --init --recursive
+
+      - name: install openssl
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get install libssl-dev
+      
+      - name: install openssl
+        if: matrix.os == 'macos-latest'
+        run: brew install openssl
+      
+      - name: install openssl
+        if: matrix.os == 'windows-latest'
+        run: choco install openssl.light
 
       - name: Build tests target
         working-directory: backend/${{ matrix.backend-directory }}
