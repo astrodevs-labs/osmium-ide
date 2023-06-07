@@ -70,11 +70,11 @@ jobs:
         run: |
           cd build/tests
           dir
-          if exist backend-${{ matrix.backend-directory }}-unit-tests.exe (
+          if (Test-Path -path .\backend-${{ matrix.backend-directory }}-unit-tests.exe) {
             .\backend-${{ matrix.backend-directory }}-unit-tests.exe
-          ) else (
+          } else {
             echo "No unit tests found for backend-${{ matrix.backend-directory }}-unit-tests"
-          )
+          }
 
       - name: Run end-to-end tests (linux)
         working-directory: backend/${{ matrix.backend-directory }}
