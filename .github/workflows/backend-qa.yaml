@@ -57,7 +57,7 @@ jobs:
         working-directory: backend/${{ matrix.backend-directory }}
         if: ${{ matrix.os == 'ubuntu-latest' && matrix.backend-directory != 'payloads' }}
         run: |
-          cd build/tests
+          cd build
           if [ -f backend-${{ matrix.backend-directory }}-unit-tests ]; then
             ./backend-${{ matrix.backend-directory }}-unit-tests
           else
@@ -68,26 +68,26 @@ jobs:
         working-directory: backend/${{ matrix.backend-directory }}
         if: ${{ matrix.os == 'windows-latest' && matrix.backend-directory != 'payloads' }}
         run: |
-          cd build/tests
+          cd build
           dir
-          if exist backend-${{ matrix.backend-directory }}-unit-tests.exe (
+          if (Test-Path -path .\backend-${{ matrix.backend-directory }}-unit-tests.exe) {
             .\backend-${{ matrix.backend-directory }}-unit-tests.exe
-          ) else (
+          } else {
             echo "No unit tests found for backend-${{ matrix.backend-directory }}-unit-tests"
-          )
+          }
 
       - name: Run end-to-end tests (linux)
         working-directory: backend/${{ matrix.backend-directory }}
         if: ${{ matrix.os == 'ubuntu-latest' && matrix.backend-directory != 'payloads' }}
         run: |
-            cd build/tests
+            cd build
             ./backend-${{ matrix.backend-directory }}-e2e-tests
 
       - name: Run end-to-end tests (windows)
         working-directory: backend/${{ matrix.backend-directory }}
         if: ${{ matrix.os == 'windows-latest' && matrix.backend-directory != 'core' && matrix.backend-directory != 'payloads' }}
         run: |
-            cd build/tests
+            cd build
             dir
             .\backend-${{ matrix.backend-directory }}-e2e-tests.exe
 
