@@ -26,6 +26,7 @@ jobs:
         # if branch does not exist, create it
         if: steps.check-branch-exists.outputs.branchExists != 'true'
         run: |
+          git checkout dev
           git checkout -b ${{ github.event.client_payload.headBranch }}
           git config --global user.email "ci@astrodevslabs.io" && git config --global user.name "Astrodevs CI"
           git commit --allow-empty -m "chore: create branch ${{ github.event.client_payload.headBranch }}-staging"
