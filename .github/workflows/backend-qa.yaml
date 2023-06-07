@@ -6,6 +6,7 @@ on:
 jobs:
   backend-build:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
@@ -13,10 +14,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Fetch submodules
+        run: git submodule update --init --recursive
+
       - name: Build backend
         working-directory: backend
         run: |
-          cmake -S . -B build
+          cmake -S . -B build 
           cmake --build build --target backend
 
   collect_dirs:
@@ -45,6 +49,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Fetch submodules
+        run: git submodule update --init --recursive
 
       - name: Build tests target
         working-directory: backend/${{ matrix.backend-directory }}
