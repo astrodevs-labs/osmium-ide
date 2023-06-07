@@ -1,13 +1,15 @@
 cmake_minimum_required(VERSION 3.17)
-project(backend)
+project(project)
 
 set(CMAKE_CXX_STANDARD 20)
-# Set to ON to enable tests targets
-set(OSMIUM_TESTS_ENABLED ON)
 
-set(modules "project")
+file(GLOB_RECURSE SRCS src/*.cpp)
+file(GLOB_RECURSE ICLS include/*.hpp)
 
-set(LIBRARY_OUTPUT_PATH ..)
+set(CMAKE_SHARED_LIBRARY_PREFIX "")
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
+set(TEST_PROJECT_NO_SSL ON)
 
 if (MSVC)
     foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
@@ -23,24 +25,14 @@ else()
 endif()
 
 
-# subfolders for  modules
-foreach(module ${modules})
-    add_subdirectory(${module})
-endforeach()
+add_library(backend-project SHARED ${SRCS} ${ICLS} ${uWebSockets_SOURCES_FILES})
+target_include_directories(backend-project PUBLIC include)
 
-if(MSVC)
-    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
-    set(BUILD_SHARED_LIBS TRUE)
-endif()
+option(OSMIUM_TESTS_ENABLED "Enable tests" OFF)
+if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR} OR ${OSMIUM_TESTS_ENABLED})
+    message(STATUS "Tests enabled")
+    include(tests/cmake/FindGoogleTest.cmake)
+    enable_testing()
 
-
-add_subdirectory(core)
-add_subdirectory(payloads)
-
-
-add_executable(backend main.cpp)
-target_link_libraries(backend backend-core)
-foreach(module ${modules})
-    add_dependencies(backend backend-${module})
-endforeach()
-
+    add_subdirectory(tests)
+endif ()
