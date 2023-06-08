@@ -1,5 +1,12 @@
 name: Create branch and draft
 
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  repository-projects: write
+  statuses: write
+
 on:
   repository_dispatch:
     types: [create-branch-and-draft]
@@ -56,6 +63,6 @@ jobs:
       - name: Create pull request
         if: steps.check-pr-exists.outputs.result.prExists != 'true'
         env:
-          GH_TOKEN: ${{ secrets.ADMIN_PAT }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh pr create --title "${{ github.event.client_payload.prTitle }}" --body "Solves #${{ github.event.client_payload.issueNumber }}" --base ${{github.event.client_payload.baseBranch }} --head ${{github.event.client_payload.headBranch }} --repo ${{ github.event.repository.full_name }} --draft
