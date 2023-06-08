@@ -1,28 +1,26 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <map>
+#include <memory>
 
 #include "Component.hpp"
 
 class ComponentTreeUpdate {
 
-    enum class Action {
+    enum Action {
         ADD,
         REMOVE,
         UPDATE
     };
 
      public:
-        ComponentTreeUpdate(Action action, payloads::Component);
+        ComponentTreeUpdate(Action action, std::shared_ptr<payloads::Component> component);
         ~ComponentTreeUpdate() = default;
 
     private:
         Action _action;
-        payloads::Component _component;
+        std::shared_ptr<payloads::Component> _component;
 
     public:
         Action getAction() const;
-        const payloads::Component& getComponent() const;
+        const std::shared_ptr<payloads::Component>&getComponent() const;
 };
