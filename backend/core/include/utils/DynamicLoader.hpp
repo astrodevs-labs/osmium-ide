@@ -11,7 +11,7 @@
 #else
     #include <dlfcn.h> //dlopen
 #endif
-#include "exceptions/DynamicLibraryException.hpp"
+#include "../exceptions/DynamicLibraryException.hpp"
 
 namespace core
 {
