@@ -4,6 +4,8 @@
 #include <vector>
 #include <map>
 
+#include "Component.hpp"
+
 class ComponentTreeUpdate {
 
     enum class Action {
@@ -13,20 +15,14 @@ class ComponentTreeUpdate {
     };
 
      public:
-        ComponentTreeUpdate(Action action, std::string type, std::string uid, std::vector<std::map<std::string, std::string>> _prop, std::vector<ComponentTreeUpdate> children);
+        ComponentTreeUpdate(Action action, payloads::Component);
         ~ComponentTreeUpdate() = default;
 
     private:
         Action _action;
-        std::string _type;
-        std::string _uid;
-        std::vector<std::map<std::string, std::string>> _props;
-        std::vector<ComponentTreeUpdate> children;
+        payloads::Component _component;
 
     public:
         Action getAction() const;
-        const std::string &getType() const;
-        const std::string &getUid() const;
-        const std::vector<std::map<std::string, std::string>> &getProps() const;
-        const std::vector<ComponentTreeUpdate> &getChildren() const;
+        const payloads::Component& getComponent() const;
 };
