@@ -14,6 +14,12 @@ using uid = std::string;
 namespace payloads
 {
 
+    struct Property {
+        std::string name;
+        std::string value;
+        bool toTransmit;
+    };
+
     /**
      * @class Component
      * @brief This type will be used inside payload and it thus needs to fit 
@@ -38,8 +44,8 @@ namespace payloads
             uid id;
             std::string type;
             std::shared_ptr<Component> parent;
-            std::vector<Component> children;
-            std::vector <std::pair<std::string, std::string>> props;
+            std::vector<std::shared_ptr<Component>> children;
+            std::vector<Property> props;
             
         private:
 
@@ -49,9 +55,9 @@ namespace payloads
 ///////////////////////////////// METHODS ///////////////////////////////
 
         public:
-            void addChild(Component child);
+            void addChild(std::shared_ptr<Component> child);
             void removeChild(uid id);
-            void addProp(std::pair<std::string, std::string> prop);
+            void addProp(Property prop);
             void removeProp(std::string key);
             
         private:

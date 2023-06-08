@@ -16,7 +16,7 @@ namespace payloads
     {
     }
 
-    void Component::addChild(Component child)
+    void Component::addChild(std::shared_ptr<Component> child)
     {
         this->children.push_back(child);
     }
@@ -25,7 +25,7 @@ namespace payloads
     {
         for (auto it = this->children.begin(); it != this->children.end(); it++)
         {
-            if (it->id == id)
+            if ((*it)->id == id)
             {
                 this->children.erase(it);
                 return;
@@ -33,7 +33,7 @@ namespace payloads
         }
     }
 
-    void Component::addProp(std::pair<std::string, std::string> prop)
+    void Component::addProp(Property prop)
     {
         this->props.push_back(prop);
     }
@@ -42,7 +42,7 @@ namespace payloads
     {
         for (auto it = this->props.begin(); it != this->props.end(); it++)
         {
-            if (it->first == key)
+            if (it->name == key)
             {
                 this->props.erase(it); // not fast
                 return;
