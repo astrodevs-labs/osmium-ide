@@ -4,66 +4,85 @@
 */
 
 
+#include <iostream>
 #include "Server.hpp"
+#include "ixwebsocket/IXGetFreePort.h"
+#include "RequestHandler.hpp"
 
-Server::Server()
+Server::Server(int port, std::string host) : _port(port ? port: ix::getFreePort())
 {
-    _server.ws<std::shared_ptr<ServerSession>>("/*", {
-            .compression = uWS::CompressOptions(uWS::DEDICATED_COMPRESSOR_4KB | uWS::DEDICATED_DECOMPRESSOR),
-            .maxPayloadLength = 100 * 1024 * 1024,
-            .idleTimeout = 16,
-            .maxBackpressure = 100 * 1024 * 1024,
-            .closeOnBackpressureLimit = false,
-            .resetIdleTimeoutOnSend = false,
-            .sendPingsAutomatically = true,
-            /* Handlers */
-            .upgrade = nullptr,
+    _server = std::make_unique<ix::WebSocketServer>(_port, host);
 
-            .open = [this](auto *ws) {
-                this->_onOpen(ws);
-            },
-            .message = [this](auto *ws, std::string_view message, uWS::OpCode opCode) {
-                this->_onMessage(ws, message, opCode);
-            },
-            .close = [this](auto *ws, int code, std::string_view message) {
-                this->_onClose(ws, code, message);
-            },
+    _server->setConnectionStateFactory([this]() {
+        return std::make_shared<ServerSession>();
     });
+
+    _server->setOnConnectionCallback([this](auto ws, auto state) {
+        this->_onConnectionOpen(ws, state);
+        std::shared_ptr<ix::WebSocket> wsPtr = ws.lock();
+        wsPtr->setOnMessageCallback([this, wsPtr, state](auto &msg) {
+            std::cout << "Received " << msg->str << std::endl;
+            _onReceive(state, *wsPtr, msg);
+        });
+    });
+
+   /* _server->setOnClientMessageCallback([this](auto state, auto &ws, auto &msg) {
+        if (msg->type == ix::WebSocketMessageType::Open) {
+            this->_onOpen(state, ws);
+        } else if (msg->type == ix::WebSocketMessageType::Close) {
+            this->_onClose(state, ws, msg);
+        } else if (msg->type == ix::WebSocketMessageType::Message) {
+            this->_onMessage(state, ws, msg);
+        }
+    });*/
+
 }
 
 void Server::run()
 {
-    _server.run();
+    _server->start();
 }
 
-int Server::listen(int port)
+int Server::listen()
 {
-    _server.listen(port, [&port](auto *listen_socket) {
-        if (listen_socket) {
-            std::cout << "Listening on port " << 9001 << std::endl;
-        }
-    });
-    return port;
+    _server->listen();
+    return _port;
 }
 
-void Server::_onOpen(uWS::WebSocket<false, true, std::shared_ptr<ServerSession>> *ws)
+void Server::_onReceive(std::shared_ptr<ix::ConnectionState> state,
+                        ix::WebSocket &ws, const ix::WebSocketMessagePtr &msg)
 {
-    auto data = ws->getUserData();
-    *data = std::make_shared<ServerSession>();
-    (*data)->setWs(ws);
-    std::cout << "New connection" << std::endl;
+    if (msg->type == ix::WebSocketMessageType::Open) {
+        this->_onOpen(state, ws);
+    } else if (msg->type == ix::WebSocketMessageType::Close) {
+        this->_onClose(state, ws, msg);
+    } else if (msg->type == ix::WebSocketMessageType::Message) {
+        this->_onMessage(state, ws, msg);
+    }
 }
 
-void Server::_onMessage(uWS::WebSocket<false, true, std::shared_ptr<ServerSession>> *ws,
-                        std::string_view message, uWS::OpCode opCode)
+void Server::_onConnectionOpen(std::weak_ptr<ix::WebSocket> ws,
+                               std::shared_ptr<ix::ConnectionState> state)
 {
-    std::cout << "New message" << message << std::endl;
-    ServerSession::broadcast(message, opCode);
+    auto session = std::dynamic_pointer_cast<ServerSession>(state);
+    session->setWs(ws.lock());
 }
 
-void Server::_onClose(uWS::WebSocket<false, true, std::shared_ptr<ServerSession>> *ws, int code,
-                      std::string_view message)
+void
+Server::_onOpen(std::shared_ptr<ix::ConnectionState> state, ix::WebSocket &ws)
 {
-    std::cout << "Connection closed" << std::endl;
-//    (*ws->getUserData())->close();
+
+}
+
+void Server::_onMessage(std::shared_ptr<ix::ConnectionState> state,
+                        ix::WebSocket &ws, const ix::WebSocketMessagePtr &msg)
+{
+    RequestHandler::handleMessage(std::dynamic_pointer_cast<ServerSession>(state), ws, msg);
+}
+
+void
+Server::_onClose(std::shared_ptr<ix::ConnectionState> state, ix::WebSocket &ws,
+                 const ix::WebSocketMessagePtr &msg)
+{
+
 }
