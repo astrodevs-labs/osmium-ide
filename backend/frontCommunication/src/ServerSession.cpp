@@ -7,7 +7,7 @@
 #include <iostream>
 #include "ServerSession.hpp"
 
-ServerSession::ServerSession() : _id(_idCounter++), _ws(nullptr)
+ServerSession::ServerSession() : _ws(nullptr)
 {
     _sessions.push_back(this);
     std::cerr << "New session " << _id << std::endl;
@@ -19,31 +19,33 @@ ServerSession::~ServerSession()
     std::cerr << "Session deleted " << _id << std::endl;
 }
 
-void ServerSession::setWs(uWS::WebSocket<false, true, std::shared_ptr<ServerSession>> *ws)
+void ServerSession::setWs(std::shared_ptr<ix::WebSocket> ws)
 {
     _ws = ws;
 }
 
-void ServerSession::send(std::string_view message, uWS::OpCode opCode)
+void ServerSession::send(std::string &message, bool binary)
 {
     if (_ws) {
-        _ws->send(message, opCode);
+        _ws->send(message, binary);
     }
 }
 
-void ServerSession::broadcast(std::string_view message, uWS::OpCode opCode)
+void ServerSession::broadcast(std::string &message, bool binary)
 {
     for (auto session: _sessions) {
-        session->send(message, opCode);
+        session->send(message, binary);
     }
 }
 
 void
-ServerSession::send(uint32_t id, std::string_view message, uWS::OpCode opCode)
+ServerSession::send(uint64_t id, std::string &message, bool binary)
 {
+    auto idStr = std::to_string(id);
+
     for (auto session: _sessions) {
-        if (session->_id == id) {
-            session->send(message, opCode);
+        if (session->_id == idStr) {
+            session->send(message, binary);
             break;
         }
     }

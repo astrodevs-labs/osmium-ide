@@ -5,8 +5,7 @@
 
 #pragma once
 
-
-#include "App.h"
+#include "ixwebsocket/IXWebSocketServer.h"
 #include "ServerSession.hpp"
 
 class Server
@@ -15,7 +14,7 @@ class Server
 ////////////////////// CONSTRUCTORS/DESTRUCTORS /////////////////////////
 
     public:
-        Server();
+        explicit Server(int port = 0, std::string host = "0.0.0.0");
 
         ~Server() = default;
 
@@ -29,7 +28,8 @@ class Server
 
 
     private:
-        uWS::App _server;
+        int _port;
+        std::unique_ptr<ix::WebSocketServer> _server;
 
 
 //////////////////////--------------------------/////////////////////////
@@ -39,15 +39,15 @@ class Server
 /////////////////////////////// METHODS /////////////////////////////////
     public:
         void run();
-        int listen(int port);
-
-
-
+        int listen();
 
     private:
-        void _onOpen(uWS::WebSocket<false, true, std::shared_ptr<ServerSession>> *ws);
-        void _onMessage(uWS::WebSocket<false, true, std::shared_ptr<ServerSession>> *ws, std::string_view message, uWS::OpCode opCode);
-        void _onClose(uWS::WebSocket<false, true, std::shared_ptr<ServerSession>> *ws, int code, std::string_view message);
+        void _onReceive(std::shared_ptr<ix::ConnectionState> state, ix::WebSocket &ws, const ix::WebSocketMessagePtr &msg);
+
+        void _onConnectionOpen(std::weak_ptr<ix::WebSocket> ws, std::shared_ptr<ix::ConnectionState> state);
+        void _onOpen(std::shared_ptr<ix::ConnectionState> state, ix::WebSocket &ws);
+        void _onMessage(std::shared_ptr<ix::ConnectionState> state, ix::WebSocket &ws, const ix::WebSocketMessagePtr &msg);
+        void _onClose(std::shared_ptr<ix::ConnectionState> state, ix::WebSocket &ws, const ix::WebSocketMessagePtr &msg);
 
 
 //////////////////////--------------------------/////////////////////////

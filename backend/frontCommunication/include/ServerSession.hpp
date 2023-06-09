@@ -7,9 +7,10 @@
 
 
 #include <vector>
-#include "WebSocket.h"
+#include "ixwebsocket/IXWebSocket.h"
+#include "ixwebsocket/IXConnectionState.h"
 
-class ServerSession
+class ServerSession : public ix::ConnectionState
 {
 
 ////////////////////// CONSTRUCTORS/DESTRUCTORS /////////////////////////
@@ -17,7 +18,7 @@ class ServerSession
     public:
         ServerSession();
 
-        ~ServerSession();
+        ~ServerSession() override;
 
 
 //////////////////////--------------------------/////////////////////////
@@ -26,18 +27,15 @@ class ServerSession
 
 ///////////////////////////// PROPERTIES ////////////////////////////////
     public:
-        void setWs(uWS::WebSocket<false, true, std::shared_ptr<ServerSession>> *ws);
+        void setWs(std::shared_ptr<ix::WebSocket> ws);
 
-        void send(std::string_view message, uWS::OpCode opCode = uWS::OpCode::TEXT);
+        void send(std::string &message, bool binary = false);
 
         void close();
 
 
     private:
-        uint32_t _id;
-        uWS::WebSocket<false, true, std::shared_ptr<ServerSession>> *_ws;
-
-        static inline uint32_t _idCounter = 0;
+        std::shared_ptr<ix::WebSocket> _ws;
         static inline std::vector<ServerSession *> _sessions;
 
 
@@ -47,9 +45,9 @@ class ServerSession
 
 /////////////////////////////// METHODS /////////////////////////////////
     public:
-        static void broadcast(std::string_view message, uWS::OpCode opCode = uWS::OpCode::TEXT);
+        static void broadcast(std::string &message, bool binary = false);
 
-        static void send(uint32_t id, std::string_view message, uWS::OpCode opCode = uWS::OpCode::TEXT);
+        static void send(uint64_t id, std::string &message, bool binary = false);
 
 
     private:

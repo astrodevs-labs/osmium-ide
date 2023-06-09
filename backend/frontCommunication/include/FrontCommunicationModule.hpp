@@ -6,6 +6,7 @@
 #pragma once
 
 #include "../../core/include/MessagingInterface.hpp"
+#include "Server.hpp"
 
 namespace front_communication
 {
@@ -31,6 +32,7 @@ namespace front_communication
 
         private:
             std::shared_ptr<core::MessagingInterface> _msg;
+            Server _server;
 
 
 //////////////////////--------------------------/////////////////////////

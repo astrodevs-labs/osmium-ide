@@ -7,7 +7,8 @@
 #include "FrontCommunicationModule.hpp"
 
 front_communication::FrontCommunicationModule::FrontCommunicationModule(
-        std::shared_ptr<core::MessagingInterface> msg) : _msg(msg)
+        std::shared_ptr<core::MessagingInterface> msg) : _msg(msg), _server(9001)
 {
-
+    _server.listen();
+    _server.run();
 }

@@ -1,0 +1,14 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ac7c296..7ac3155 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -237,8 +237,7 @@ endif()
+ option(USE_ZLIB "Enable zlib support" TRUE)
+ 
+ if (USE_ZLIB)
+-  find_package(ZLIB REQUIRED)
+-  target_link_libraries(ixwebsocket PRIVATE ZLIB::ZLIB)
++  target_link_libraries(ixwebsocket PRIVATE z)
+ 
+   target_compile_definitions(ixwebsocket PUBLIC IXWEBSOCKET_USE_ZLIB)
+ endif()

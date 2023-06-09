@@ -9,12 +9,13 @@
 
 TEST(CorrectBehavior, CorrectBehavior)
 {
+#if _WIN32
+    std::string path = "./backend-frontCommunication.dll";
+#else
+    std::string path = "./backend-frontCommunication.so";
+#endif
     EXPECT_NO_THROW({
         std::shared_ptr<osmium::moduleTester::Tester> tester = osmium::moduleTester::Tester::create();
-#ifdef _WIN32
-        tester->loadModule("./backend-frontCommunication.dll");
-#else
-        tester->loadModule("./backend-frontCommunication.so");
-#endif
+        tester->loadModule(path);
     });
 }
