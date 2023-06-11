@@ -50,6 +50,13 @@ namespace payloads
         }
     }
 
+    std::shared_ptr<Component> Component::createSimpleIconComponent(uid id, std::string path)
+    {
+        std::shared_ptr<Component> component = std::make_shared<Component>(id);
+        component->addProp({ "path", path, true });
+        return component;
+    }
+
     std::shared_ptr<Component> Component::findComponentById(std::string id) {
         for (auto child: this->children) {
             if (child->id == id)
