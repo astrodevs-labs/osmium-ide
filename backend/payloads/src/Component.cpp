@@ -4,6 +4,7 @@
 */
 
 #include "Component.hpp"
+#include "../../core/include/Core.hpp"
 
 namespace payloads
 {
@@ -50,10 +51,12 @@ namespace payloads
         }
     }
 
-    std::shared_ptr<Component> Component::createSimpleIconComponent(uid id, std::string path)
+    std::shared_ptr<Component> Component::createSimpleIconComponent(std::string icon)
     {
+        std::string id = core::Core::generateHandlerId();
         std::shared_ptr<Component> component = std::make_shared<Component>(id);
-        component->addProp({ "path", path, true });
+        component->type = "simple-icon";
+        component->addProp({ "icon", icon, true });
         return component;
     }
 
