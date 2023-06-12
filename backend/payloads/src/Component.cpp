@@ -50,4 +50,11 @@ namespace payloads
         }
     }
 
+    std::shared_ptr<Component> createSimpleButtonComponent(uid id, std::string label)
+    {
+        std::shared_ptr<Component> component = std::make_shared<Component>(id);
+        component->addProp({"label", label, true});
+        return component;
+    }
+
 } // namespace payloads
