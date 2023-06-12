@@ -44,6 +44,8 @@ void RequestHandler::initialQuery(json json_data)
     std::cout << "Initial query" << std::endl;
     std::cout << json_data.dump(4) << std::endl;
     json_data["type"] = "initialQueryResponse";
+    json_data["components"] = json::object();
+    json_data["components"]["id"] = "id";
     std::string dump = json_data.dump();
     std::cout << dump << std::endl;
     ServerSession::broadcast(dump);
