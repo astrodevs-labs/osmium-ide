@@ -4,6 +4,7 @@
 */
 
 #include "Component.hpp"
+#include "../../core/include/Core.hpp"
 
 namespace payloads
 {
@@ -48,6 +49,26 @@ namespace payloads
                 return;
             }
         }
+    }
+
+    std::shared_ptr<Component> Component::createSimpleIconComponent(std::string icon)
+    {
+        std::string id = core::Core::generateHandlerId();
+        std::shared_ptr<Component> component = std::make_shared<Component>(id);
+        component->type = "simple-icon";
+        component->addProp({ "icon", icon, true });
+        return component;
+    }
+
+    std::shared_ptr<Component> Component::findComponentById(std::string id) {
+        for (auto child: this->children) {
+            if (child->id == id)
+                return child;
+            auto component = child->findComponentById(id);
+            if (component != nullptr)
+                return component;
+        }
+        return nullptr;
     }
 
 } // namespace payloads

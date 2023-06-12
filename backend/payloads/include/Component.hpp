@@ -59,7 +59,9 @@ namespace payloads
             void removeChild(uid id);
             void addProp(Property prop);
             void removeProp(std::string key);
-            
+            std::shared_ptr<Component> findComponentById(std::string id);
+            static std::shared_ptr<Component> createSimpleIconComponent(uid id, std::string path);
+
         private:
 
 //////////////////////--------------------------/////////////////////////

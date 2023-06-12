@@ -7,9 +7,9 @@
 #include <iostream>
 
 #ifdef _WIN32
-    #include <Windows.h>
+#include <Windows.h>
 #else
-    #include <dlfcn.h> //dlopen
+#include <dlfcn.h> //dlopen
 #endif
 #include "../exceptions/DynamicLibraryException.hpp"
 
@@ -19,25 +19,20 @@ namespace core
     class DynamicLoader
     {
 
-////////////////////// CONSTRUCTORS/DESTRUCTORS /////////////////////////
+            ////////////////////// CONSTRUCTORS/DESTRUCTORS /////////////////////////
 
         public:
             DynamicLoader() = default;
 
-            DynamicLoader(const DynamicLoader&) = delete;
-            DynamicLoader(DynamicLoader&&) noexcept;
+            DynamicLoader(const DynamicLoader &) = delete;
+            DynamicLoader(DynamicLoader &&) noexcept;
 
             ~DynamicLoader();
 
+            //////////////////////--------------------------/////////////////////////
 
-//////////////////////--------------------------/////////////////////////
-
-
-
-///////////////////////////// PROPERTIES ////////////////////////////////
+            ///////////////////////////// PROPERTIES ////////////////////////////////
         public:
-
-
         protected:
 #ifdef _WIN32
             /**
@@ -56,12 +51,9 @@ namespace core
              */
             std::string _libPath;
 
+            //////////////////////--------------------------/////////////////////////
 
-//////////////////////--------------------------/////////////////////////
-
-
-
-/////////////////////////////// METHODS /////////////////////////////////
+            /////////////////////////////// METHODS /////////////////////////////////
         public:
             /**
              * @details Close the previous opened library (if one is open) and opens the one passed as parameter
@@ -79,11 +71,10 @@ namespace core
              * @throws DynamicLibraryException if the symbol is not found and no_except is false
              * @return the symbol with the specified type signature
              */
-            template<typename T>
-            T loadSymbol(std::string name, bool no_except = false)
+            template <typename T> T loadSymbol(std::string name, bool no_except = false)
             {
 #ifdef _WIN32
-                T s = (T) GetProcAddress(_handler, name.c_str());
+                T s = (T)GetProcAddress(_handler, name.c_str());
 #else
                 void *s = dlsym(_handler, name.c_str());
 #endif
@@ -104,9 +95,6 @@ namespace core
             static std::string _getLastErrorStdStr();
 #endif
 
-
-//////////////////////--------------------------/////////////////////////
-
+            //////////////////////--------------------------/////////////////////////
     };
-}
-
+} // namespace core
