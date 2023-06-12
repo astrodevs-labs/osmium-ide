@@ -14,56 +14,56 @@ using uid = std::string;
 namespace payloads
 {
 
-    struct Property {
-        std::string name;
-        std::string value;
-        bool toTransmit;
+    struct Property
+    {
+            std::string name;
+            std::string value;
+            bool toTransmit;
     };
 
     /**
      * @class Component
-     * @brief This type will be used inside payload and it thus needs to fit 
+     * @brief This type will be used inside payload and it thus needs to fit
      * all components the frontend can handle.
      */
     class Component
     {
 
-
-////////////////////// CONSTRUCTORS/DESTRUCTORS /////////////////////////
+            ////////////////////// CONSTRUCTORS/DESTRUCTORS /////////////////////////
 
         public:
             Component(uid id);
             Component(uid id, std::shared_ptr<Component> parent);
+            Component(std::string content, std::string encodedContent, std::string filename, std::string path);
             ~Component() = default;
 
-//////////////////////--------------------------/////////////////////////
+            //////////////////////--------------------------/////////////////////////
 
-
-///////////////////////////// PROPERTIES ////////////////////////////////
+            ///////////////////////////// PROPERTIES ////////////////////////////////
         public:
             uid id;
             std::string type;
             std::shared_ptr<Component> parent;
             std::vector<std::shared_ptr<Component>> children;
             std::vector<Property> props;
-            
+            std::string _content;
+            std::string _encodedContent;
+            std::string _filename;
+            std::string _path;
+
         private:
+            //////////////////////--------------------------/////////////////////////
 
-//////////////////////--------------------------/////////////////////////
-
-
-///////////////////////////////// METHODS ///////////////////////////////
+            ///////////////////////////////// METHODS ///////////////////////////////
 
         public:
             void addChild(std::shared_ptr<Component> child);
             void removeChild(uid id);
             void addProp(Property prop);
             void removeProp(std::string key);
-            
+
         private:
-
-//////////////////////--------------------------/////////////////////////
-
+            //////////////////////--------------------------/////////////////////////
     };
 
 } // namespace payloads
