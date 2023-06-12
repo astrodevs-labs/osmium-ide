@@ -50,4 +50,20 @@ namespace payloads
         }
     }
 
+    std::shared_ptr<Component> Component::findComponentById(std::string id) {
+        for (auto child: this->children) {
+            if (child->id == id)
+                return child;
+            auto component = child->findComponentById(id);
+            if (component != nullptr)
+                return component;
+        }
+        return nullptr;
+    }
+
+    std::shared_ptr<Component> Component::createSimpleCenterCanvasComponent(uid id)
+    {
+        return std::make_shared<Component>(id);
+    }
+
 } // namespace payloads
