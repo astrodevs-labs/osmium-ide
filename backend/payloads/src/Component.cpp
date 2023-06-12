@@ -12,9 +12,12 @@ namespace payloads
 
     Component::Component(uid id, std::shared_ptr<Component> parent) : id(id), parent(parent) {}
 
-    Component::Component(std::string content, std::string encodedContent, std::string filename, std::string path)
-        : _content(content), _encodedContent(encodedContent), _filename(filename), _path(path)
+    Component::Component(Property content, Property encodedContent, Property filename, Property path)
     {
+        this->addProp(content);
+        this->addProp(encodedContent);
+        this->addProp(filename);
+        this->addProp(path);
     }
 
     void Component::addChild(std::shared_ptr<Component> child) { this->children.push_back(child); }

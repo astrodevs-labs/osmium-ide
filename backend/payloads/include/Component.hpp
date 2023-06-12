@@ -34,7 +34,7 @@ namespace payloads
         public:
             Component(uid id);
             Component(uid id, std::shared_ptr<Component> parent);
-            Component(std::string content, std::string encodedContent, std::string filename, std::string path);
+            Component(Property content, Property encodedContent, Property filename, Property path);
             ~Component() = default;
 
             //////////////////////--------------------------/////////////////////////
@@ -46,10 +46,6 @@ namespace payloads
             std::shared_ptr<Component> parent;
             std::vector<std::shared_ptr<Component>> children;
             std::vector<Property> props;
-            std::string _content;
-            std::string _encodedContent;
-            std::string _filename;
-            std::string _path;
 
         private:
             //////////////////////--------------------------/////////////////////////
