@@ -71,4 +71,14 @@ namespace payloads
         return nullptr;
     }
 
+    std::shared_ptr<Component> Component::createLabelComponent(std::string id, std::string value, std::string font, std::string size)
+    {
+        auto label = std::make_shared<Component>(id);
+
+        label->props.emplace_back("value", value, true);
+        label->props.emplace_back("font", font, true);
+        label->props.emplace_back("size", size, true);
+        return label;
+    }
+
 } // namespace payloads
