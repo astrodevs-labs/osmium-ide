@@ -60,6 +60,8 @@ namespace payloads
             void addProp(Property prop);
             void removeProp(std::string key);
             std::shared_ptr<Component> findComponentById(std::string id);
+
+            static std::shared_ptr<Component> createTabComponent(std::string id, std::string name, std::string tabType);
             
         private:
 

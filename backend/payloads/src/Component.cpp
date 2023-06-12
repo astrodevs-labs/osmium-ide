@@ -38,6 +38,15 @@ namespace payloads
         this->props.push_back(prop);
     }
 
+    std::shared_ptr<Component> Component::createTabComponent(std::string id, std::string name, std::string tabType)
+    {
+        auto tab = std::make_shared<Component>(id);
+
+        tab->props.emplace_back("name", name, true);
+        tab->props.emplace_back("tab-type", tabType, true);
+        return tab;
+    }
+
     void Component::removeProp(std::string key)
     {
         for (auto it = this->props.begin(); it != this->props.end(); it++)
