@@ -1,16 +1,19 @@
 cmake_minimum_required(VERSION 3.17)
-project(backend)
+project(front-communication)
 
 set(CMAKE_CXX_STANDARD 20)
-# Set to ON to enable tests targets
-set(OSMIUM_TESTS_ENABLED ON)
 
-set(modules "layout" "frontCommunication")
+file(GLOB_RECURSE SRCS src/*.cpp)
+file(GLOB_RECURSE ICLS include/*.hpp)
+
+set(CMAKE_SHARED_LIBRARY_PREFIX "")
+
+set(TEST_FRONT_COMMUNICATION_NO_SSL ON)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 if (MSVC)
     foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
         string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
-        message("OUTPUTCONFIG: ${OUTPUTCONFIG}")
         set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR} )
         set( CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR} )
         set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR} )
@@ -23,25 +26,18 @@ endif()
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
-# subfolders for  modules
-foreach(module ${modules})
+include(cmake/FindZlib.cmake)
+include(cmake/FindIXWebSocket.cmake)
 
-    add_subdirectory(${module})
-endforeach()
+add_library(backend-frontCommunication SHARED ${SRCS} ${ICLS})
+target_include_directories(backend-frontCommunication PUBLIC include ${ixwebsocket_INCLUDE_DIR})
+target_link_libraries(backend-frontCommunication ixwebsocket)
 
-if(MSVC)
-    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
-    set(BUILD_SHARED_LIBS TRUE)
-endif()
+option(OSMIUM_TESTS_ENABLED "Enable tests" OFF)
+if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR} OR ${OSMIUM_TESTS_ENABLED})
+    message(STATUS "Tests enabled")
+    include(tests/cmake/FindGoogleTest.cmake)
+    enable_testing()
 
-
-add_subdirectory(core)
-add_subdirectory(payloads)
-
-
-add_executable(backend main.cpp)
-target_link_libraries(backend backend-core)
-foreach(module ${modules})
-    add_dependencies(backend backend-${module})
-endforeach()
-
+    add_subdirectory(tests)
+endif ()
