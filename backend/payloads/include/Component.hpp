@@ -34,8 +34,9 @@ namespace payloads
         public:
             Component(uid id);
             Component(uid id, std::shared_ptr<Component> parent);
-            Component(Property content, Property encodedContent, Property filename, Property path);
             ~Component() = default;
+            std::shared_ptr<Component> CreatFileTab(std::string id, std::string content, std::string encodedContent, std::string filename,
+                                                    std::string path);
 
             //////////////////////--------------------------/////////////////////////
 

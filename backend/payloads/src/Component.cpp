@@ -12,12 +12,16 @@ namespace payloads
 
     Component::Component(uid id, std::shared_ptr<Component> parent) : id(id), parent(parent) {}
 
-    Component::Component(Property content, Property encodedContent, Property filename, Property path)
+    std::shared_ptr<Component> Component::CreatFileTab(std::string id, std::string content, std::string encodedContent, std::string filename,
+                                                       std::string path)
     {
-        this->addProp(content);
-        this->addProp(encodedContent);
-        this->addProp(filename);
-        this->addProp(path);
+        auto tab = std::make_shared<Component>(id);
+
+        this->addProp({"content", content, true});
+        this->addProp({"encodedContent", encodedContent, true});
+        this->addProp({"filename", filename, true});
+        this->addProp({"path", path, true});
+        return tab;
     }
 
     void Component::addChild(std::shared_ptr<Component> child) { this->children.push_back(child); }
