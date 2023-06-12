@@ -61,4 +61,9 @@ namespace payloads
         return nullptr;
     }
 
+    std::shared_ptr<Component> Component::createSimpleCardComponent(uid id)
+    {
+        return std::make_shared<Component>(id);
+    }
+
 } // namespace payloads
