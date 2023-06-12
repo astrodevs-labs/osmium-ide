@@ -61,7 +61,7 @@ namespace payloads
         return nullptr;
     }
 
-    std::shared_ptr<Component> createSimpleCenterCanvasComponent(uid id)
+    std::shared_ptr<Component> Component::createSimpleCenterCanvasComponent(uid id)
     {
         return std::make_shared<Component>(id);
     }
