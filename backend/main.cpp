@@ -8,5 +8,9 @@ int main()
 
     std::shared_ptr<core::Core> core = std::make_shared<core::Core>();
 
-    return 0;
+    core->loadSoFile("./backend-frontCommunication.so");
+
+    std::promise<void> prom;
+    std::future<void> fut = prom.get_future();
+    fut.wait();
 }

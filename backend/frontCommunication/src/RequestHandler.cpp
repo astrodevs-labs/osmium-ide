@@ -4,6 +4,7 @@
 */
 
 
+#include <iostream>
 #include "RequestHandler.hpp"
 
 void RequestHandler::handleMessage(std::shared_ptr<ServerSession> session,
@@ -40,7 +41,12 @@ void RequestHandler::handleMessage(std::shared_ptr<ServerSession> session,
 
 void RequestHandler::initialQuery(json json_data)
 {
-
+    std::cout << "Initial query" << std::endl;
+    std::cout << json_data.dump(4) << std::endl;
+    json_data["type"] = "initialQueryResponse";
+    std::string dump = json_data.dump();
+    std::cout << dump << std::endl;
+    ServerSession::broadcast(dump);
 }
 
 void RequestHandler::componentInteracted(json json_data)

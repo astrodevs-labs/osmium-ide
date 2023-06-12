@@ -21,7 +21,6 @@ Server::Server(int port, std::string host) : _port(port ? port: ix::getFreePort(
         this->_onConnectionOpen(ws, state);
         std::shared_ptr<ix::WebSocket> wsPtr = ws.lock();
         wsPtr->setOnMessageCallback([this, wsPtr, state](auto &msg) {
-            std::cout << "Received " << msg->str << std::endl;
             _onReceive(state, *wsPtr, msg);
         });
     });

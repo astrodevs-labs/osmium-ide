@@ -4,7 +4,7 @@ import { Message } from "./Message";
 export default class ProtocolConnector {
   private _webSocket: WebSocket;
   private _toSend: string[] = [];
-  private _onMessageSubject = new Subject<string>();
+  private _onMessageSubject = new Subject<Message>();
   private _onMessageObservable = this._onMessageSubject.asObservable();
 
   constructor(url: string) {
@@ -23,7 +23,8 @@ export default class ProtocolConnector {
   private _onmessage() {
     this._webSocket.onmessage = (event) => {
       console.log(`ProtocolConnector onmessage`);
-      this._onMessageSubject.next(event.data);
+      const data = JSON.parse(event.data);
+      this._onMessageSubject.next(data);
     }
   }
 
