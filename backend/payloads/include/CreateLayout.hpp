@@ -31,6 +31,7 @@ namespace payloads
         protected:
         
         private:
+            std::string _name;
             std::shared_ptr<Component> _response;
 
 //////////////////////--------------------------/////////////////////////
@@ -38,8 +39,11 @@ namespace payloads
 
 ///////////////////////////////// METHODS ///////////////////////////////
         public:
+            const std::string &getName() const;
+            void setName(std::string &name);
             std::shared_ptr<Component> getResponse() const;
             void setResponse(std::shared_ptr<Component> response);
+
 
         
         private:
