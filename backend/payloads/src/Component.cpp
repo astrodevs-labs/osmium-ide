@@ -4,6 +4,7 @@
 */
 
 #include "Component.hpp"
+#include "../../core/include/Core.hpp"
 
 namespace payloads
 {
@@ -59,6 +60,17 @@ namespace payloads
                 return component;
         }
         return nullptr;
+    }
+
+    std::shared_ptr<Component> Component::createLeftSideBarComponent(std::vector<std::shared_ptr<Component>> children)
+    {
+        std::string id = core::Core::generateHandlerId();
+        std::shared_ptr<Component> component = std::make_shared<Component>(id);
+        component->type = "left-side-bar";
+        for (auto child: children) {
+            component->addChild(std::move(child));
+        }
+        return component;
     }
 
 } // namespace payloads
