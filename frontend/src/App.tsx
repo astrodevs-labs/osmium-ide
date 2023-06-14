@@ -4,10 +4,11 @@ import ComponentsBuilder from './builder/ComponentsBuilder';
 import { useInitialQuery } from './protocolHelpers/useInitialQuery';
 import { useState } from 'react';
 import { Component } from './protocolHelpers/Component';
+import {tree3} from "./tree";
 
 const App = () => {
   const tree = useInitialQuery();
-  console.log("tree" + tree);
+  console.log("tree" + JSON.stringify(tree3));
   const minimize = async () => {
     await appWindow.minimize();
   };

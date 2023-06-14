@@ -3,12 +3,12 @@ import { NodeType } from './builder/ComponentsBuilder';
 export const tree: NodeType = {
   id: '1',
   type: 'root',
-  properties: [],
+  props: [],
   children: [
     {
       id: '2',
       type: 'sidebar',
-      properties: [
+      props: [
         {
           name: 'align',
           value: 'left',
@@ -18,7 +18,7 @@ export const tree: NodeType = {
         {
           id: '3',
           type: 'sidebar-item',
-          properties: [
+          props: [
             {
               name: 'title',
               value: 'Files',
@@ -37,7 +37,7 @@ export const tree: NodeType = {
         {
           id: '4',
           type: 'sidebar-item',
-          properties: [
+          props: [
             {
               name: 'title',
               value: 'Files',
@@ -54,7 +54,7 @@ export const tree: NodeType = {
     {
       id: '5',
       type: 'canvas',
-      properties: [],
+      props: [],
       children: [],
     },
   ],
@@ -63,12 +63,12 @@ export const tree: NodeType = {
 export const tree2: NodeType = {
   id: '1',
   type: 'root',
-  properties: [],
+  props: [],
   children: [
     {
       id: '2',
       type: 'sidebar',
-      properties: [
+      props: [
         {
           name: 'align',
           value: 'left',
@@ -78,7 +78,7 @@ export const tree2: NodeType = {
         {
           id: '3',
           type: 'sidebar-item',
-          properties: [
+          props: [
             {
               name: 'title',
               value: 'Files',
@@ -93,7 +93,7 @@ export const tree2: NodeType = {
         {
           id: '5',
           type: 'sidebar-panel',
-          properties: [
+          props: [
             {
               name: 'expanded',
               value: true,
@@ -103,7 +103,7 @@ export const tree2: NodeType = {
             {
               id: '6',
               type: 'file-hierarchy',
-              properties: [
+              props: [
                 {
                   name: 'files',
                   value: [
@@ -167,7 +167,7 @@ export const tree2: NodeType = {
     {
       id: '4',
       type: 'canvas',
-      properties: [],
+      props: [],
       children: [],
     },
   ],
@@ -176,12 +176,12 @@ export const tree2: NodeType = {
 export const tree3: NodeType = {
   id: '1',
   type: 'root',
-  properties: [],
+  props: [],
   children: [
     {
       id: '2',
       type: 'sidebar',
-      properties: [
+      props: [
         {
           name: 'align',
           value: 'left',
@@ -191,7 +191,7 @@ export const tree3: NodeType = {
         {
           id: '3',
           type: 'sidebar-item',
-          properties: [
+          props: [
             {
               name: 'title',
               value: 'Files',
@@ -206,7 +206,7 @@ export const tree3: NodeType = {
         {
           id: '5',
           type: 'sidebar-panel',
-          properties: [
+          props: [
             {
               name: 'expanded',
               value: true,
@@ -216,7 +216,7 @@ export const tree3: NodeType = {
             {
               id: '6',
               type: 'file-hierarchy',
-              properties: [
+              props: [
                 {
                   name: 'files',
                   value: [
@@ -280,17 +280,17 @@ export const tree3: NodeType = {
     {
       id: '4',
       type: 'canvas',
-      properties: [],
+      props: [],
       children: [
         {
           id: '7',
           type: 'tabs-bar',
-          properties: [],
+          props: [],
           children: [
             {
               id: '8',
               type: 'tab',
-              properties: [
+              props: [
                 {
                   name: 'title',
                   value: 'index.html',
@@ -305,7 +305,7 @@ export const tree3: NodeType = {
             {
               id: '9',
               type: 'tab',
-              properties: [
+              props: [
                 {
                   name: 'title',
                   value: 'style.css',
@@ -320,7 +320,7 @@ export const tree3: NodeType = {
             {
               id: '10',
               type: 'tab',
-              properties: [
+              props: [
                 {
                   name: 'title',
                   value: 'script.js',
@@ -335,7 +335,7 @@ export const tree3: NodeType = {
             {
               id: '10',
               type: 'tab',
-              properties: [
+              props: [
                 {
                   name: 'title',
                   value: 'script.js',
@@ -350,7 +350,7 @@ export const tree3: NodeType = {
             {
               id: '10',
               type: 'tab',
-              properties: [
+              props: [
                 {
                   name: 'title',
                   value: 'script.js',
@@ -365,7 +365,7 @@ export const tree3: NodeType = {
             {
               id: '10',
               type: 'tab',
-              properties: [
+              props: [
                 {
                   name: 'title',
                   value: 'script.js',
@@ -380,7 +380,7 @@ export const tree3: NodeType = {
             {
               id: '10',
               type: 'tab',
-              properties: [
+              props: [
                 {
                   name: 'title',
                   value: 'script.js',
@@ -397,7 +397,7 @@ export const tree3: NodeType = {
         {
           id: '11',
           type: 'editor',
-          properties: [
+          props: [
             {
               name: 'content',
               value: 'YXdlc29tZSBjb2Rl',

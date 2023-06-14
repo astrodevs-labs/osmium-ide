@@ -42,7 +42,7 @@ const ComponentsBuilder: React.FC<{ component: Component | null }> = ({ componen
   console.log(component);
   // @ts-ignore
   const Component = componentTypes[component.type];
-  const state = component?.props.reduce((acc: any, curr: Property) => {
+  const state = component?.props.reduce<Object>((acc: Object, curr: Property) => {
     acc[curr.name] = curr.value;
     return acc;
   }, {});
