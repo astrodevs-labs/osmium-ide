@@ -11,17 +11,19 @@ import {
   Tab,
   Editor,
 } from '../components/Components';
+import { Property } from '../protocolHelpers/Property';
+import { Component } from '../protocolHelpers/Component';
 
-interface PropertyType {
-  name: string;
-  value: any;
-}
-export interface NodeType {
-  id: string;
-  type: string;
-  properties: PropertyType[];
-  children: NodeType[];
-}
+// interface PropertyType {
+//   name: string;
+//   value: any;
+// }
+// export interface NodeType {
+//   id: string;
+//   type: string;
+//   properties: PropertyType[];
+//   children: NodeType[];
+// }
 
 const componentTypes = {
   button: Button,
@@ -36,29 +38,29 @@ const componentTypes = {
   editor: Editor,
 };
 
-const ComponentsBuilder: React.FC<{ node: NodeType }> = ({ node }) => {
-  console.log(node);
+const ComponentsBuilder: React.FC<{ component: Component | null }> = ({ component }) => {
+  console.log(component);
   // @ts-ignore
-  const Component = componentTypes[node.type];
-  const state = node.properties.reduce((acc: any, curr: PropertyType) => {
+  const Component = componentTypes[component.type];
+  const state = component?.props.reduce((acc: any, curr: Property) => {
     acc[curr.name] = curr.value;
     return acc;
   }, {});
 
   if (Component === undefined) {
-    console.error(`Failed to load component with type ${node.type}`);
+    console.error(`Failed to load component with type ${component?.type}`);
     return (
-      <div id={node.id} {...state}>
-        {node.children.map((child) => (
-          <ComponentsBuilder node={child} key={child.id} />
+      <div id={component?.id} {...state}>
+        {component?.children.map((child) => (
+          <ComponentsBuilder component={child} key={child.id} />
         ))}
       </div>
     );
   }
   return (
-    <Component id={node.id} {...state}>
-      {node.children.map((child) => (
-        <ComponentsBuilder node={child} key={child.id} />
+    <Component id={component?.id} {...state}>
+      {component?.children.map((child) => (
+        <ComponentsBuilder component={child} key={child.id} />
       ))}
     </Component>
   );

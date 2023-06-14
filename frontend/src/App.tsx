@@ -1,8 +1,12 @@
 import { appWindow } from '@tauri-apps/api/window';
 import ComponentsBuilder from './builder/ComponentsBuilder';
-import { tree, tree2, tree3 } from './tree';
+// import { tree, tree2, tree3 } from './tree';
+import { useInitialQuery } from './protocolHelpers/useInitialQuery';
+import { useState } from 'react';
+import { Component } from './protocolHelpers/Component';
 
 const App = () => {
+  const [tree, setTree] = useState<Component | null>(useInitialQuery());
   const minimize = async () => {
     await appWindow.minimize();
   };
@@ -37,7 +41,7 @@ const App = () => {
           </div>
         </div>
       </div>
-      <ComponentsBuilder node={tree3} />
+      <ComponentsBuilder component={tree} />
     </div>
   );
 };
