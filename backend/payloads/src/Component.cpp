@@ -4,6 +4,7 @@
 */
 
 #include "Component.hpp"
+#include "../../core/include/Core.hpp"
 
 namespace payloads
 {
@@ -59,6 +60,17 @@ namespace payloads
                 return component;
         }
         return nullptr;
+    }
+
+    std::shared_ptr<Component> Component::createTabsManagerComponent(std::vector<std::shared_ptr<Component>> tabs)
+    {
+        std::string id = core::Core::generateHandlerId();
+        std::shared_ptr<Component> component = std::make_shared<Component>(id);
+        component->type = "tabs-manager";
+        for (auto tab: tabs) {
+            component->addChild(std::move(tab));
+        }
+        return component;
     }
 
 } // namespace payloads
