@@ -3,6 +3,7 @@
 //
 
 #include "../include/NewLayout.hpp"
+#include <stdexcept>
 
 payloads::NewLayout::NewLayout(std::string name, std::shared_ptr<Component> tree) {
     this->_name = std::move(name);
