@@ -6,7 +6,8 @@ import { useState } from 'react';
 import { Component } from './protocolHelpers/Component';
 
 const App = () => {
-  const [tree, setTree] = useState<Component | null>(useInitialQuery());
+  const tree = useInitialQuery();
+  console.log("tree" + tree);
   const minimize = async () => {
     await appWindow.minimize();
   };
@@ -41,7 +42,7 @@ const App = () => {
           </div>
         </div>
       </div>
-      <ComponentsBuilder component={tree} />
+      {tree && <ComponentsBuilder component={tree} />}
     </div>
   );
 };

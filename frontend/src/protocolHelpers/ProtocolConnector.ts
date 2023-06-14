@@ -15,14 +15,15 @@ export default class ProtocolConnector {
 
   private _onopen() {
     this._webSocket.onopen = () => {
-      console.log(`ProtocolConnector onopen`);
+      console.log(`ProtocolConnector on open`);
       this._toSend.forEach(data => this._webSocket.send(data));
     }
   }
 
   private _onmessage() {
     this._webSocket.onmessage = (event) => {
-      console.log(`ProtocolConnector onmessage`);
+      console.warn(event);
+      console.log(`ProtocolConnector on message`);
       const data = JSON.parse(event.data);
       this._onMessageSubject.next(data);
     }

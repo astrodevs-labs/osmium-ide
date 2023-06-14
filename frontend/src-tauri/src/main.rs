@@ -1,20 +1,27 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+use std::env;
+use std::path::Path;
 use std::process::Command;
 use std::thread;
 
 fn launch_backend() {
-    let mut path = String::from("../../backend/backend");
+    let root = Path::new("../../backend/build");
+    assert!(env::set_current_dir(&root).is_ok());
+    let mut path = String::from("./backend");
 
     if cfg!(target_os = "windows") {
         path.push_str(".exe");
     }
 
-    thread::Builder::new().name("osmium-backend".to_string()).spawn(move || {
-        Command::new(&path)
-            .spawn()
-            .expect("Failed to execute backend binary");
-    }).expect("Failed to spawn backend thread");
+    thread::Builder::new()
+        .name("osmium-backend".to_string())
+        .spawn(move || {
+            Command::new(&path)
+                .spawn()
+                .expect("Failed to execute backend binary");
+        })
+        .expect("Failed to spawn backend thread");
 }
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command

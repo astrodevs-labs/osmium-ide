@@ -13,9 +13,9 @@ export function useInitialQuery(): Component | null {
         setComponents(data.components);
       }
     });
-    protocolService.send({type: "initialQuery"})
+    protocolService.sendInitialQuery();
     return () => subscription.unsubscribe();
-  }, [protocolService]);
+  },[]);
 
   return components;
 }

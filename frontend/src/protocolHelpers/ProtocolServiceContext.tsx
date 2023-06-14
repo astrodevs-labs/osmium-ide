@@ -1,11 +1,12 @@
 import ProtocolConnector from "./ProtocolConnector";
-import {createContext, useContext, useRef, useState, ReactNode, useEffect} from "react";
+import { createContext, useContext, useRef, useState, ReactNode, useEffect } from "react";
+import ProtocolService from "./ProtocolService";
 
-export const ProtocolServiceContext = createContext<ProtocolConnector | null>(null);
+export const ProtocolServiceContext = createContext<ProtocolService | null>(null);
 
-const ProtocolServiceProvider = ({ children }: { children?: ReactNode}) => {
+const ProtocolServiceProvider = ({ children }: { children?: ReactNode }) => {
   return (
-    <ProtocolServiceContext.Provider value={new ProtocolConnector("ws://127.0.0.1:9001")}>
+    <ProtocolServiceContext.Provider value={new ProtocolService("ws://127.0.0.1", 9001)}>
       {children}
     </ProtocolServiceContext.Provider>
   );

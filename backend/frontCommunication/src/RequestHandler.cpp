@@ -3,13 +3,10 @@
 ** RequestHandler.cpp by 0xMemoryGrinder
 */
 
-
 #include <iostream>
 #include "RequestHandler.hpp"
 
-void RequestHandler::handleMessage(std::shared_ptr<ServerSession> session,
-                                   ix::WebSocket &ws,
-                                   const ix::WebSocketMessagePtr &msg)
+void RequestHandler::handleMessage(std::shared_ptr<ServerSession> session, ix::WebSocket &ws, const ix::WebSocketMessagePtr &msg)
 {
     if (msg->binary) {
         ws.send("Error: Invalid format", false);
@@ -18,8 +15,7 @@ void RequestHandler::handleMessage(std::shared_ptr<ServerSession> session,
     json j;
     try {
         j = json::parse(msg->str);
-    }
-    catch (json::parse_error& e) {
+    } catch (json::parse_error &e) {
         ws.send("Error: this is not json", false);
         return;
     }
@@ -33,8 +29,7 @@ void RequestHandler::handleMessage(std::shared_ptr<ServerSession> session,
 
     if (it != _functionMap.end()) {
         it->second(j);
-    }
-    else {
+    } else {
         ws.send("Not yet implemented", false);
     }
 }
@@ -46,12 +41,22 @@ void RequestHandler::initialQuery(json json_data)
     json_data["type"] = "initialQueryResponse";
     json_data["components"] = json::object();
     json_data["components"]["id"] = "id";
+    json_data["components"]["type"] = "button";
+    json_data["components"]["children"] = json::array();
+    json_data["components"]["props"] = json::array();
+    // auto obj = json::object();
+    // obj["value"] = "Hello world";
+    // obj["name"] = "value";
+    auto obj2 = json::parse("{\"id\":\"1\",\"type\":\"root\",\"props\":[],\"children\":[{\"id\":\"2\",\"type\":\"sidebar\",\"props\":[{\"name\":"
+                            "\"align\",\"value\":\"left\"}],\"children\":[{\"id\":\"3\",\"type\":\"sidebar-item\",\"props\":[{\"name\":\"title\","
+                            "\"value\":\"Files\"},{\"name\":\"icon\",\"value\":\"file\"},{\"name\":\"selected\",\"value\":false}],\"children\":[]},{"
+                            "\"id\":\"4\",\"type\":\"sidebar-item\",\"props\":[{\"name\":\"title\",\"value\":\"Files\"},{\"name\":\"icon\",\"value\":"
+                            "\"zoom\"}],\"children\":[]}]},{\"id\":\"5\",\"type\":\"canvas\",\"props\":[],\"children\":[]}]}");
+    json_data["components"] = obj2;
+    // json_data["components"]["props"].push_back(obj2);
     std::string dump = json_data.dump();
     std::cout << dump << std::endl;
     ServerSession::broadcast(dump);
 }
 
-void RequestHandler::componentInteracted(json json_data)
-{
-
-}
+void RequestHandler::componentInteracted(json json_data) {}

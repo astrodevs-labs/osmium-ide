@@ -14,7 +14,7 @@ export default class ProtocolService {
     }
     
     public sendInitialQuery(): void {
-        this._connector.send({type: "initialRequest"});
+        this._connector.send({type: "initialQuery"});
     }
 
     public sendComponentInteracted(componentId: string, interactionType: string): void {

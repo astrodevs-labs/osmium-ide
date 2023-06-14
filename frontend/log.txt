@@ -1,0 +1,7 @@
+
+  VITE v4.3.9  ready in 697 ms
+
+  ➜  Local:   http://127.0.0.1:1420/
+  ➜  Network: use --host to expose
+Hello, World!
+🚀 A new version of Tauri CLI is available! [1.4.0]

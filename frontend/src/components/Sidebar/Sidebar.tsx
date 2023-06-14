@@ -11,12 +11,12 @@ const Sidebar: FC<SideBarProps> = ({ children }) => {
         {children &&
           children
             // @ts-ignore
-            .filter((child) => child.props.node.type === 'sidebar-item')}
+            .filter((child) => child.props.node?.type === 'sidebar-item')}
       </div>
       {children &&
         children
           // @ts-ignore
-          .filter((child) => child.props.node.type === 'sidebar-panel')}
+          .filter((child) => child.props.node?.type === 'sidebar-panel')}
     </div>
   );
 };
