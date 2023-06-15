@@ -9,6 +9,8 @@
 #include <vector>
 #include <memory>
 
+#include "./ExpendableList.hpp"
+
 using uid = std::string;
 
 namespace payloads
@@ -59,6 +61,8 @@ namespace payloads
             void removeChild(uid id);
             void addProp(Property prop);
             void removeProp(std::string key);
+
+            static std::shared_ptr<Component> createExpandableListView(uid id, ExpendableList list);
             
         private:
 
