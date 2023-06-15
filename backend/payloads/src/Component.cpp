@@ -50,4 +50,15 @@ namespace payloads
         }
     }
 
+    std::shared_ptr<Component> Component::createExpandableListView(uid uid, ExpendableList list) {
+        auto component = std::make_shared<Component>(uid);
+        component->type = "ExpandableList";
+        component->addProp({ "name", list.getName(), true });
+        component->addProp({ "type", list.getType(), true });
+        for (auto item : list.getItems()) {
+            component->addChild(createExpandableListView(uid + item.getName(), item));
+        }
+        return component;
+    }
+
 } // namespace payloads
