@@ -26,7 +26,7 @@ endif()
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
-include(cmake/FindZlib.cmake)
+#include(cmake/FindZlib.cmake)
 include(cmake/FindIXWebSocket.cmake)
 
 add_library(backend-frontCommunication SHARED ${SRCS} ${ICLS})

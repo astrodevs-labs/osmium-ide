@@ -16,7 +16,7 @@ class Server
     public:
         explicit Server(int port = 0, std::string host = "0.0.0.0");
 
-        ~Server() = default;
+        ~Server();
 
 
 //////////////////////--------------------------/////////////////////////

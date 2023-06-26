@@ -8,9 +8,11 @@
 #include "Server.hpp"
 #include "ixwebsocket/IXGetFreePort.h"
 #include "RequestHandler.hpp"
+#include <ixwebsocket/IXNetSystem.h>
 
 Server::Server(int port, std::string host) : _port(port ? port: ix::getFreePort())
 {
+    ix::initNetSystem();
     _server = std::make_unique<ix::WebSocketServer>(_port, host);
 
     _server->setConnectionStateFactory([this]() {
@@ -84,4 +86,8 @@ Server::_onClose(std::shared_ptr<ix::ConnectionState> state, ix::WebSocket &ws,
                  const ix::WebSocketMessagePtr &msg)
 {
 
+}
+
+Server::~Server() {
+    ix::uninitNetSystem();
 }
