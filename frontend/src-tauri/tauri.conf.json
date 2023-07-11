@@ -15,19 +15,6 @@
       "path": {
         "all": true
       },
-      "fs": {
-        "scope": ["$DESKTOP\\TEST\\*", "/home/**/*"],
-        "all": true,
-        "readFile": true,
-        "writeFile": true,
-        "readDir": true,
-        "copyFile": true,
-        "createDir": true,
-        "removeDir": true,
-        "removeFile": true,
-        "renameFile": true,
-        "exists": true
-      },
       "window": {
         "all": false,
         "close": true,
@@ -42,7 +29,7 @@
       "all": false,
       "shell": {
         "all": false,
-        "open": true
+        "execute": true
       }
     },
     "bundle": {

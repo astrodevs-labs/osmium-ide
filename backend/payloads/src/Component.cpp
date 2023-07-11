@@ -50,4 +50,15 @@ namespace payloads
         }
     }
 
+    std::shared_ptr<Component> Component::findComponentById(std::string id) {
+        for (auto child: this->children) {
+            if (child->id == id)
+                return child;
+            auto component = child->findComponentById(id);
+            if (component != nullptr)
+                return component;
+        }
+        return nullptr;
+    }
+
 } // namespace payloads
